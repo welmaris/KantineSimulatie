@@ -36,4 +36,12 @@ public class Artikel {
     public void setPrijs(BigDecimal prijs) {
         this.prijs = prijs;
     }
+
+    @Override
+    public String toString() {
+        return "Artikel{" +
+                "naam='" + naam + '\'' +
+                ", prijs=" + prijs +
+                '}';
+    }
 }
