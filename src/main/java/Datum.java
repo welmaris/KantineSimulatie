@@ -6,6 +6,19 @@ public class Datum {
 	private int maand;
 	private int jaar;
 
+	private static int MAAND_JAN = 1;
+	private static int MAAND_FEB = 2;
+	private static int MAAND_MRT = 3;
+	private static int MAAND_APR = 4;
+	private static int MAAND_MEI = 5;
+	private static int MAAND_JUN = 6;
+	private static int MAAND_JUL = 7;
+	private static int MAAND_AUG = 8;
+	private static int MAAND_SEP = 9;
+	private static int MAAND_OKT = 10;
+	private static int MAAND_NOV = 11;
+	private static int MAAND_DEC = 12;
+
 	/**
 	 * Constructor
 	 * @param dag
@@ -46,7 +59,7 @@ public class Datum {
 			return false;
 		}
 		//hier word gecontroleerd of de maand februari is
-		if (maand == 2 ){
+		if (maand == MAAND_FEB ){
 			//hier word gecontroleerd of het een schrikkeljaar is
 			if (jaar % 4 == 0) {
 				//hier word gecontroleerd of het een uitzondering is op het schrikkeljaar
@@ -62,11 +75,11 @@ public class Datum {
 				}
 			} else if (dag < 29){return true;}
 		}
-		if (maand == 1 || maand == 3 || maand == 5|| maand == 7|| maand == 8|| maand== 10|| maand == 12){
+		if (maand == MAAND_JAN || maand == MAAND_MRT || maand == MAAND_MEI|| maand == MAAND_JUL|| maand == MAAND_AUG|| maand== MAAND_OKT|| maand == MAAND_DEC){
 			if (dag < 32){return true;}
 			else return false;
 		}
-		if ( maand == 4|| maand == 6|| maand == 9 || maand == 11){
+		if ( maand == MAAND_APR|| maand == MAAND_JUN|| maand == MAAND_SEP || maand == MAAND_NOV){
 			if (dag<31){return true;}
 			else return false;
 		}
