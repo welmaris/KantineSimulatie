@@ -9,6 +9,7 @@ public class KassaRij {
 
     /**
      * Constructor
+     * De kassarij word hier leegegemaakt zodat er niet nog mensen(Dienblad) in de rij staan
      */
     public KassaRij() {
         // method body omitted
@@ -18,7 +19,7 @@ public class KassaRij {
     /**
      * Persoon sluit achter in de rij aan
      *
-     * @param klant
+     * @param klant de klant die een dienblad in de hand heeft
      */
     public void sluitAchteraan(Dienblad klant) {
         // hier word de destbetreffende persoon achteraan in de arraylist gezet
