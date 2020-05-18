@@ -5,11 +5,14 @@ import java.util.LinkedList;
 
 public class KassaRij {
 
+    private ArrayList<Dienblad> kassarij;
+
     /**
      * Constructor
      */
     public KassaRij() {
         // method body omitted
+    kassarij.clear();
     }
 
     /**
@@ -18,7 +21,9 @@ public class KassaRij {
      * @param klant
      */
     public void sluitAchteraan(Dienblad klant) {
-        // method body omitted
+        // hier word de destbetreffende persoon achteraan in de arraylist gezet
+
+            kassarij.add(klant);
     }
 
     /**
@@ -28,7 +33,15 @@ public class KassaRij {
      * @return Eerste klant in de rij of null
      */
     public Dienblad eerstePersoonInRij() {
-        // method body omitted
+        // hier word de index 0 van de arraylist opgevraagd
+      if(!kassarij.isEmpty()) {
+
+
+          Dienblad eersteKlant = kassarij.get(0);
+          kassarij.remove(0);
+          return eersteKlant;
+      }
+      return null;
     }
 
     /**
@@ -37,6 +50,7 @@ public class KassaRij {
      * @return Of er wel of geen rij bestaat
      */
     public boolean erIsEenRij() {
-        // method body omitted
+        // checken of arraylist null is en dan teruggeven
+return !kassarij.isEmpty();
     }
 }
