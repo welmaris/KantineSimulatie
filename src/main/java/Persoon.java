@@ -45,14 +45,17 @@ public class Persoon {
     }
 
     public void setVoornaam(String voornaam) {
+
         this.voornaam = voornaam;
     }
 
     public void setAchternaam(String achternaam) {
+
         this.achternaam = achternaam;
     }
 
     public void setGeboortedatum(Datum geboortedatum) {
+
         this.geboortedatum = geboortedatum;
     }
 
@@ -63,15 +66,23 @@ public class Persoon {
      */
     public void setGeslacht(char geslacht) {
         this.geslacht = geslacht;
-        if (geslacht != 'v' && geslacht != 'm') {
+        /*if (geslacht != 'v' && geslacht != 'm') {
             System.out.println("Onbekend");
         } else if (geslacht == 'v') {
             System.out.println("Vrouw");
         } else {
             System.out.println("Man");
+        }*/
+        switch (geslacht) {
+            case 'v':
+                System.out.println("Vrouw");
+            break;
+            case 'm':
+                System.out.println("Man");
+            break;
+            default:
+                System.out.println("Onbekend");
         }
-        //this.geslacht = geslacht;
-
     }
 
     public String getBSN() {

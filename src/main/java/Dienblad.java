@@ -12,6 +12,7 @@ public class Dienblad {
      * Constructor
      */
     public Dienblad(ArrayList<Artikel> artikelen) {
+
         this.artikelen = artikelen;
     }
 
@@ -19,6 +20,7 @@ public class Dienblad {
      * Constructor voor klant
      */
     public Dienblad(Persoon klant) {
+
         this.klant = klant;
     }
 
@@ -49,7 +51,13 @@ public class Dienblad {
      */
     public double getTotaalPrijs() {
         // method body omitted
-
+        int totaal = 0;
+        Iterator<Artikel> it = artikelen.iterator();
+        while(it.hasNext()) {
+            Artikel artikel = it.next();
+            totaal += artikel.getPrijs();
+        }
+        return totaal;
     }
 
     public Persoon getKlant() {
