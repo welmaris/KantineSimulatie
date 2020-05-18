@@ -39,9 +39,6 @@ public class Artikel {
 
     @Override
     public String toString() {
-        return "Artikel{" +
-                "naam='" + naam + '\'' +
-                ", prijs=" + prijs +
-                '}';
+        return naam + " €" + prijs;
     }
 }
