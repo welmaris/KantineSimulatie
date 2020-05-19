@@ -1,16 +1,14 @@
 package main.java;
 
-import java.math.BigDecimal;
-
 /**
  * klasse voor het creëeren van een artikel met een naam en een prijs.
  * voor het opgeven van een prijs, gebruik BigDecimal.valueOf(0) en geef de waarde op tussen de haakjes.
  */
 public class Artikel {
     private String naam;
-    private BigDecimal prijs;
+    private double prijs;
 
-    public Artikel(String naam, BigDecimal prijs){
+    public Artikel(String naam, double prijs){
         this.naam = naam;
         this.prijs = prijs;
 
@@ -18,7 +16,7 @@ public class Artikel {
 
     public Artikel(){
         naam = null;
-        prijs = BigDecimal.valueOf(0);
+        prijs = 0;
     }
 
     public String getNaam() {
@@ -29,11 +27,11 @@ public class Artikel {
         this.naam = naam;
     }
 
-    public BigDecimal getPrijs() {
+    public double getPrijs() {
         return prijs;
     }
 
-    public void setPrijs(BigDecimal prijs) {
+    public void setPrijs(double prijs) {
         this.prijs = prijs;
     }
 

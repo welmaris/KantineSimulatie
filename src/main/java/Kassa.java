@@ -1,23 +1,22 @@
 package main.java;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Kassa {
-    private BigDecimal geldInKassa;
+    private double geldInKassa;
     private Dienblad dienblad;
     private KassaRij kassaRij;
-    private BigDecimal totaalPrijs;
+    private double totaalPrijs;
     private int gepasseederArtikelen;
 
     /**
      * Constructor
      */
     public Kassa(KassaRij kassarij) {
-        geldInKassa = BigDecimal.valueOf(0);
+        geldInKassa = 0;
         dienblad = kassarij.eerstePersoonInRij();
-        totaalPrijs = BigDecimal.valueOf(0);
+        totaalPrijs = 0;
         gepasseederArtikelen = 0;
         this.kassaRij = kassarij;
 
@@ -32,8 +31,8 @@ public class Kassa {
      */
     public void rekenAf(Dienblad klant) {
         gepasseederArtikelen += klant.getAantalArtikelen();
-        totaalPrijs = BigDecimal.valueOf(klant.getTotaalPrijs());
-        geldInKassa.add(totaalPrijs);
+        totaalPrijs = klant.getTotaalPrijs();
+        geldInKassa += totaalPrijs;
 
     }
 
@@ -53,7 +52,7 @@ public class Kassa {
      *
      * @return hoeveelheid geld in de kassa
      */
-    public BigDecimal hoeveelheidGeldInKassa() {
+    public double hoeveelheidGeldInKassa() {
         return geldInKassa;
     }
 
@@ -62,7 +61,7 @@ public class Kassa {
      * kassa.
      */
     public void resetKassa() {
-        geldInKassa = BigDecimal.valueOf(0);
+        geldInKassa = 0;
         gepasseederArtikelen = 0;
 
     }
