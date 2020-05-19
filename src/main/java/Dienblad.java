@@ -55,7 +55,7 @@ public class Dienblad {
         Iterator<Artikel> it = artikelen.iterator();
         while(it.hasNext()) {
             Artikel artikel = it.next();
-            totaal += artikel.getPrijs();
+            totaal += artikel.getPrijs().intValue();
         }
         return totaal;
     }
