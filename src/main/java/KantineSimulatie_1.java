@@ -36,11 +36,12 @@ public class KantineSimulatie {
             // verwerk rij voor de kassa
             kantine.verwerkRijVoorKassa();
 
+            kantine.getKassa();
             // toon dagtotalen (artikelen en geld in kassa)
-            kantine.hoeveelheidGeldInKassa();
+            /*kantine.hoeveelheidGeldInKassa();
 
             // reset de kassa voor de volgende dag
-            kantine.resetKassa();
+            kantine.resetKassa();*/
         }
     }
 

@@ -1,9 +1,12 @@
 package main.java;
 
+import java.util.ArrayList;
+
 public class Kantine {
 
     private Kassa kassa;
     private KassaRij kassarij;
+    private Dienblad dienblad;
 
     /**
      * Constructor
@@ -11,6 +14,7 @@ public class Kantine {
     public Kantine() {
         kassarij = new KassaRij();
         kassa = new Kassa(kassarij);
+        //dienblad = new dienblad();
     }
 
     /**
@@ -20,15 +24,24 @@ public class Kantine {
      */
     public void loopPakSluitAan() {
         // method body omitted
+        dienblad.setKlant(new Persoon());
+        dienblad.voegToe(new Artikel());
+        dienblad.voegToe(new Artikel());
+        kassarij.sluitAchteraan(dienblad);
     }
 
     /**
      * Deze methode handelt de rij voor de kassa af.
      */
     public void verwerkRijVoorKassa() {
-        while () {
+        while (kassarij.erIsEenRij()) {
             // omitted
+            kassarij.eerstePersoonInRij();
         }
+    }
+
+    public Kassa getKassa() {
+        return kassa;
     }
 
     /**
@@ -36,8 +49,9 @@ public class Kantine {
      *
      * @return hoeveelheid geld in kassa
      */
-    public double hoeveelheidGeldInKassa() {
+    /*public double hoeveelheidGeldInKassa() {
         // method body omitted
+        return kassa.hoeveelheidGeldInKassa();
     }
 
     /**
@@ -45,15 +59,17 @@ public class Kantine {
      *
      * @return het aantal gepasseerde artikelen
      */
-    public int aantalArtikelen() {
+    /*public int aantalArtikelen() {
         // method body omitted
+        return kassa.aantalArtikelen();
     }
 
     /**
      * Deze methode reset de bijgehouden telling van het aantal artikelen en "leegt" de inhoud van
      * de kassa.
      */
-    public void resetKassa() {
+    /*public void resetKassa() {
         // method body omitted
-    }
+        kassa.resetKassa();
+    }*/
 }
