@@ -1,18 +1,17 @@
 package main.java;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Stack;
+import java.util.*;
 
 public class Dienblad {
-    private ArrayList<Artikel> artikelen;
+    // dit moet later een Queue<Persoon>, maar het is een interface, hier leren we later meer over
+    private Stack<Artikel> artikelen;
     private Iterator<Artikel> artikelIterator;
     private Persoon klant;
 
     /**
      * Constructor
      */
-    public Dienblad(ArrayList<Artikel> artikelen) {
+    public Dienblad(Stack<Artikel> artikelen) {
 
         this.artikelen = artikelen;
     }
