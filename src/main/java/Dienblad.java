@@ -42,7 +42,13 @@ public class Dienblad {
      */
     public int getAantalArtikelen() {
         // method body omitted
-        return artikelen.size();
+        //return artikelen.size();
+        int artikelenAantal = 0;
+        while(artikelIterator.hasNext()) {
+            artikelenAantal++;
+            artikelIterator.next();
+        }
+        return artikelenAantal;
     }
 
     /**
