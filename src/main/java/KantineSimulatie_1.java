@@ -38,10 +38,10 @@ public class KantineSimulatie {
 
             kantine.getKassa();
             // toon dagtotalen (artikelen en geld in kassa)
-            /*kantine.hoeveelheidGeldInKassa();
+            kantine.getKassa().hoeveelheidGeldInKassa();
 
             // reset de kassa voor de volgende dag
-            kantine.resetKassa();*/
+            kantine.getKassa().resetKassa();
         }
     }
 
@@ -57,7 +57,7 @@ public class KantineSimulatie {
             dagen = Integer.parseInt(args[0]);
         }
 
-        //simulate(dagen);
+        // simulate(dagen);
         simuleer(dagen);
     }
 }

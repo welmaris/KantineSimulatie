@@ -46,7 +46,7 @@ public class KantineSimulatie {
                 getRandomArray(AANTAL_ARTIKELEN, MIN_ARTIKELEN_PER_SOORT, MAX_ARTIKELEN_PER_SOORT);
         kantineaanbod = new KantineAanbod(artikelnamen, artikelprijzen, hoeveelheden);
 
-        kantine.setKantineAanbod(kantineaanbod);
+        kantineaanbod.setKantineAanbod(kantineaanbod);
     }
 
     /**
@@ -107,19 +107,21 @@ public class KantineSimulatie {
         for(int i = 0; i < dagen; i++) {
 
             // bedenk hoeveel personen vandaag binnen lopen
-            int aantalpersonen = ... ;
+            int aantalpersonen = getRandomValue(MIN_PERSONEN_PER_DAG, MAX_PERSONEN_PER_DAG);
 
             // laat de personen maar komen...
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
+                Dienblad dienblad = new Dienblad(new Persoon());
+
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = ... ;
+                int aantalArtikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
 
                 // genereer de "artikelnummers", dit zijn indexen
                 // van de artikelnamen
-                array int[] tepakken = getRandomArray(
-                    aantalartikelen, 0, AANTAL_ARTIKELEN-1);
+                int[] tepakken = getRandomArray(
+                    aantalArtikelen, 0, AANTAL_ARTIKELEN-1);
 
                 // vind de artikelnamen op basis van
                 // de indexen hierboven
@@ -127,16 +129,23 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
+                for(int k = 0; aantalArtikelen > k; k++){
+                    Random random = new Random();
+                    int value = getRandomValue(1, AANTAL_ARTIKELEN);
+                    dienblad.voegToe(new Artikel(artikelen[value], artikelprijzen[value]));
+                }
 
             }
 
             // verwerk rij voor de kassa
+            kantine.verwerkRijVoorKassa();
 
-            // druk de dagtotalen af en hoeveel personen binnen
-
-            // zijn gekomen
+            // druk de dagtotalen af en hoeveel personen binnen zijn gekomen
+            System.out.println("€" + kantine.getKassa().hoeveelheidGeldInKassa() + " omzet.");
+            System.out.println(aantalpersonen + " bezoekers.");
 
             // reset de kassa voor de volgende dag
+            kantine.getKassa().resetKassa();
 
         }
     }
