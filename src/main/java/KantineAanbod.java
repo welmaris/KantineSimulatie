@@ -33,7 +33,7 @@ public class KantineAanbod {
         return kantineaanbod;
     }
 //setter van kantineaanbod
-    public void setKantineaanbod(KantineAanbod kantineaanbod) {
+    public void setKantineAanbod(KantineAanbod kantineaanbod) {
         this.kantineaanbod = kantineaanbod;
     }
 

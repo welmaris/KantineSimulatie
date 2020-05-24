@@ -57,7 +57,7 @@ public class KantineSimulatie {
             dagen = Integer.parseInt(args[0]);
         }
 
-        simulate(dagen);
-        //simuleer(dagen);
+        // simulate(dagen);
+        simuleer(dagen);
     }
 }
