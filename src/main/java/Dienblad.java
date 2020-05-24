@@ -6,6 +6,7 @@ import java.util.Stack;
 
 public class Dienblad {
     private ArrayList<Artikel> artikelen;
+    private Iterator<Artikel> artikelIterator;
     private Persoon klant;
 
     /**

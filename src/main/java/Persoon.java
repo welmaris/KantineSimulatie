@@ -36,7 +36,7 @@ public class Persoon {
         this.BSN = null;
         this.voornaam = null;
         this.achternaam = null;
-        this.geboortedatum = null;
+        this.geboortedatum = null; //new geboortedatum;
         this.geslacht = 'o';
     }
 
