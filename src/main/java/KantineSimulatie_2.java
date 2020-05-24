@@ -95,6 +95,19 @@ public class KantineSimulatie {
 
         return artikelen;
     }
+/*
+ dé methode
+
+    public void loopPakSluitAan() {
+        // method body omitted
+        dienblad.setKlant(new Persoon());
+        dienblad.voegToe(new Artikel());
+        dienblad.voegToe(new Artikel());
+        kassarij.sluitAchteraan(dienblad);
+    }
+
+
+ */
 
     /**
      * Deze methode simuleert een aantal dagen
@@ -113,8 +126,9 @@ public class KantineSimulatie {
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
+                Dienblad dienblad = new Dienblad(new Persoon());
                 // en bedenk hoeveel artikelen worden gepakt
-                int aantalartikelen = ... ;
+                int aantalartikelen = random rand.nextInt(10) + 1;
 
                 // genereer de "artikelnummers", dit zijn indexen
                 // van de artikelnamen
