@@ -44,9 +44,10 @@ public class Kassa {
     public int getAantalArtikelen() {
         // method body omitted
         int artikelenAantal = 0;
-        while(dienblad.getArtikelIterator().hasNext()) {
+        Iterator<Artikel> artikelIterator = dienblad.getArtikelIterator();
+        while(artikelIterator.hasNext()) {
             artikelenAantal++;
-            dienblad.getArtikelIterator().next();
+            artikelIterator.next();
         }
         return artikelenAantal;
     }
@@ -59,8 +60,9 @@ public class Kassa {
     public double getTotaalPrijs() {
         // method body omitted
         double totaal = 0;
-        while(dienblad.getArtikelIterator().hasNext()) {
-            Artikel artikel = dienblad.getArtikelIterator().next();
+        Iterator<Artikel> artikelIterator = dienblad.getArtikelIterator();
+        while(artikelIterator.hasNext()) {
+            Artikel artikel = artikelIterator.next();
             totaal += artikel.getPrijs();
         }
         return totaal;
