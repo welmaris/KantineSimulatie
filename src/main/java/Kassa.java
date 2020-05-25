@@ -30,10 +30,40 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        gepasseederArtikelen += klant.getAantalArtikelen();
-        totaalPrijs = klant.getTotaalPrijs();
+        gepasseederArtikelen += getAantalArtikelen();
+        totaalPrijs = getTotaalPrijs();
         geldInKassa += totaalPrijs;
 
+    }
+
+    /**
+     * Methode om aantal artikelen op dienblad te tellen
+     *
+     * @return Het aantal artikelen
+     */
+    public int getAantalArtikelen() {
+        // method body omitted
+        int artikelenAantal = 0;
+        while(dienblad.getArtikelIterator().hasNext()) {
+            artikelenAantal++;
+            dienblad.getArtikelIterator().next();
+        }
+        return artikelenAantal;
+    }
+
+    /**
+     * Methode om de totaalprijs van de artikelen op dienblad uit te rekenen
+     *
+     * @return De totaalprijs
+     */
+    public double getTotaalPrijs() {
+        // method body omitted
+        double totaal = 0;
+        while(dienblad.getArtikelIterator().hasNext()) {
+            Artikel artikel = dienblad.getArtikelIterator().next();
+            totaal += artikel.getPrijs();
+        }
+        return totaal;
     }
 
     /**
