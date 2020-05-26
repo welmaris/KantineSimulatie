@@ -9,7 +9,20 @@ public class Administratie {
      * @return het gemiddelde
      */
     public double berekenGemiddeldAantal(int[] aantal) {
-        // method body omitted
+
+        double totaal = 0;
+        double hoeveelheid = aantal.length;
+
+        // Waarde wordt toegevoegd aan het totaalbedrag
+        for(int i = 0; hoeveelheid > i; i++){
+            double bedrag = aantal[i];
+            totaal += bedrag;
+        }
+
+        // Gemiddelde wordt berekend
+        double gemiddelde = totaal / hoeveelheid;
+
+        return gemiddelde;
     }
 
     /**
@@ -19,7 +32,22 @@ public class Administratie {
      * @return het gemiddelde
      */
     public double berekenGemiddeldeOmzet(double[] omzet) {
-        // method body omitted
+
+        double totaal = 0;
+        double hoeveelheid = omzet.length;
+        double gemiddelde = 0;
+
+        if(hoeveelheid > 0) {
+            // Waarde wordt toegevoegd aan het totaalbedrag
+            for(int i = 0; hoeveelheid > i; i++) {
+                double bedrag = omzet[i];
+                totaal += bedrag;
+            }
+
+            // Gemiddelde wordt berekend
+            gemiddelde = totaal / hoeveelheid;
+        }
+        return gemiddelde;
     }
 
     /**
@@ -34,7 +62,7 @@ public class Administratie {
         for(int i = 0; i < 7; i++) {
 
             int j = 0;
-            while ( ... ) {
+            while ( temp.length > j ) {
                 temp[i] += omzet[i + 7 * j];
 
                 // omitted
