@@ -9,7 +9,7 @@ public class Dienblad {
     private Persoon klant;
 
     /**
-     * Constructor
+     * Constructor voor dienblad met artikelen
      */
     public Dienblad(Stack<Artikel> artikelen) {
 
@@ -34,14 +34,26 @@ public class Dienblad {
         artikelen.add(artikel);
     }
 
+    /**
+     * Getter voor ArtikelIterator als Iterator met type Artikel
+     * @return artikelIterator
+     */
     public Iterator<Artikel> getArtikelIterator() {
         return artikelIterator;
     }
 
+    /**
+     * Getter voor de klant als type Persoon
+     * @return klant
+     */
     public Persoon getKlant() {
         return klant;
     }
 
+    /**
+     * setter voor de klant als type Persoon
+     * @param klant
+     */
     public void setKlant(Persoon klant) {
         this.klant = klant;
     }

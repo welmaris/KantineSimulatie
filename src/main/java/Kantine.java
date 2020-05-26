@@ -9,12 +9,12 @@ public class Kantine {
     private Dienblad dienblad;
 
     /**
-     * Constructor
+     * Constructor voor de Kantine. Heeft geen parameters nodig.
+     * Maakt een kassa met een kassarij.
      */
     public Kantine() {
         kassarij = new KassaRij();
         kassa = new Kassa(kassarij);
-        //dienblad = new dienblad();
     }
 
     /**
@@ -23,10 +23,28 @@ public class Kantine {
      * voor de kassa.
      */
     public void loopPakSluitAan() {
-        // method body omitted
         dienblad.setKlant(new Persoon());
         dienblad.voegToe(new Artikel());
         dienblad.voegToe(new Artikel());
+        kassarij.sluitAchteraan(dienblad);
+    }
+
+    /**
+     * In deze methode wordt een dienblad met artikelen
+     * in de kassarij geplaatst
+     * @param dienblad
+     * @param artikelnamen
+     */
+    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen){
+        // zet dienblad
+        this.dienblad = dienblad;
+
+        // voeg artikelen toe aan dienblad
+        for(int i = 0; i < artikelnamen.length; i++){
+            dienblad.voegToe(new Artikel(artikelnamen[i], 0.00));
+        }
+
+        // sluit achteraan in de rij
         kassarij.sluitAchteraan(dienblad);
     }
 
@@ -35,41 +53,15 @@ public class Kantine {
      */
     public void verwerkRijVoorKassa() {
         while (kassarij.erIsEenRij()) {
-            // omitted
             kassarij.eerstePersoonInRij();
         }
     }
 
+    /**
+     * Getter voor de kassa van de Klasse Kassa
+     * @return kassa
+     */
     public Kassa getKassa() {
         return kassa;
     }
-
-    /**
-     * Deze methode telt het geld uit de kassa
-     *
-     * @return hoeveelheid geld in kassa
-     */
-    /*public double hoeveelheidGeldInKassa() {
-        // method body omitted
-        return kassa.hoeveelheidGeldInKassa();
-    }
-
-    /**
-     * Deze methode geeft het aantal gepasseerde artikelen.
-     *
-     * @return het aantal gepasseerde artikelen
-     */
-    /*public int aantalArtikelen() {
-        // method body omitted
-        return kassa.aantalArtikelen();
-    }
-
-    /**
-     * Deze methode reset de bijgehouden telling van het aantal artikelen en "leegt" de inhoud van
-     * de kassa.
-     */
-    /*public void resetKassa() {
-        // method body omitted
-        kassa.resetKassa();
-    }*/
 }
