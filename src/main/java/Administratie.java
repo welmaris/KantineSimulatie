@@ -2,13 +2,17 @@ package main.java;
 
 public class Administratie {
 
+    private Administratie(){
+
+    }
+
     /**
      * Deze methode berekent van de int array aantal de gemiddelde waarde
      *
      * @param aantal
      * @return het gemiddelde
      */
-    public double berekenGemiddeldAantal(int[] aantal) {
+    public static double berekenGemiddeldAantal(int[] aantal) {
 
         double totaal = 0;
         double hoeveelheid = aantal.length;
@@ -31,7 +35,7 @@ public class Administratie {
      * @param omzet
      * @return het gemiddelde
      */
-    public double berekenGemiddeldeOmzet(double[] omzet) {
+    public static double berekenGemiddeldeOmzet(double[] omzet) {
 
         double totaal = 0;
         double hoeveelheid = omzet.length;
