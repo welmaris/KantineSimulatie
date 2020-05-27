@@ -62,15 +62,24 @@ public class Administratie {
      */
 
     public static double[] berekenDagOmzet(double[] omzet) {
-        double[] temp = new double[7];
-        for(int i = 0; i < 7; i++) {
 
+        // Opslag voor de omzetten
+        double[] temp = new double[7];
+
+        // Ga door de omzet lijst heen voor een week (7 dagen)
+        for(int i = 0; i < temp.length; i++) {
+
+            // j terugzetten op de eerste week
             int j = 0;
-            while ( temp.length > j ) {
+
+            // Kijken voor dag i in week j
+            while( omzet.length >i + j*7) {
+
+                // Omzet toevoegen aan de dag van de week.
                 temp[i] += omzet[i + 7 * j];
 
-                // omitted
-
+                // Verder gaan naar de volgende week
+                j++;
             }
         }
         return temp;
