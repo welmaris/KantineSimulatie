@@ -2,6 +2,8 @@ package main.java;
 
 public class Administratie {
 
+    static final int  DAYS_IN_WEEK = 7;
+
     private Administratie(){
 
     }
@@ -64,7 +66,8 @@ public class Administratie {
     public static double[] berekenDagOmzet(double[] omzet) {
 
         // Opslag voor de omzetten
-        double[] temp = new double[7];
+
+        double[] temp = new double[DAYS_IN_WEEK];
 
         // Ga door de omzet lijst heen voor een week (7 dagen)
         for(int i = 0; i < temp.length; i++) {
@@ -73,10 +76,10 @@ public class Administratie {
             int j = 0;
 
             // Kijken voor dag i in week j
-            while( omzet.length >i + j*7) {
+            while( omzet.length >i + j*DAYS_IN_WEEK) {
 
                 // Omzet toevoegen aan de dag van de week.
-                temp[i] += omzet[i + 7 * j];
+                temp[i] += omzet[i + DAYS_IN_WEEK * j];
 
                 // Verder gaan naar de volgende week
                 j++;
