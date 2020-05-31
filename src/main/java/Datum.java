@@ -20,7 +20,7 @@ public class Datum {
 	private static int MAAND_DEC = 12;
 
 	/**
-	 * Constructor
+	 * Constructor voor datum met 3 int parameters
 	 * @param dag
 	 * @param maand
 	 * @param jaar
@@ -47,42 +47,52 @@ public class Datum {
 
 	}
 
+	/**
+	 * Methode die checkt of de datum werkelijk bestaat.
+	 * Controleert ook op schikkeljaren en uitzonderingen daarop
+	 * @param dag
+	 * @param maand
+	 * @param jaar
+	 * @return
+	 */
 	public boolean bestaatDatum(int dag, int maand, int jaar) {
-		// TODO
 
-
-
-		//hier word gecontroleerd of de maand tussen de 1 en de 12 is
-		//hier word gecontroleerd of de dag tussen de 1 en de 31 ligt
-		//hier word gecontroleerd of het jaar tussen de  1900 en de 2100 ligt
-		if ( maand < 1  ||maand > 12 || dag < 1 || dag > 31 || jaar < 1900 || jaar > 2100) {
+		// Hier word gecontroleerd of de maand tussen de 1 en de 12 is --> hoeft niet persé, wordt later ook gedaan
+		// Hier word gecontroleerd of de dag tussen de 1 en de 31 ligt --> hoeft niet persé, wordt later ook gedaan
+		// Hier word gecontroleerd of het jaar tussen de  1900 en de 2100 ligt
+//		if ( maand < 1  ||maand > 12 || dag < 1 || dag > 31 || jaar < 1900 || jaar > 2100) {
+		if ( jaar < 1900 || jaar > 2100) {
 			return false;
 		}
-		//hier word gecontroleerd of de maand februari is
+
+		// Hier word gecontroleerd of de maand februari is
 		if (maand == MAAND_FEB ){
-			//hier word gecontroleerd of het een schrikkeljaar is
-			if (jaar % 4 == 0) {
-				//hier word gecontroleerd of het een uitzondering is op het schrikkeljaar
-				if (jaar % 100 == 0) {
-					//hier word gecontroleerd of het geen uitzondering op de uitzondering is en dus WEL een schrikkeljaar is
-					if (jaar % 400 == 0 && dag < 30) {
-						return true;
-					} else if (dag < 29) {
-						return true;
-					}
-				} else if (dag < 30) {
-					return true;
-				}
-			} else if (dag < 29){return true;}
+
+			// Hier word gecontroleerd of het geen uitzonderingsjaar is op het schikkeljaar
+			if(jaar % 4 == 0 & jaar % 100 != 0){
+				if(dag <= 29){ return true; }
+
+			// Check of jaar een uitzondering op de uitzondering is voor schikkeljaren
+			} else if(jaar % 400 == 0){
+				if(dag <= 29){ return true; }
+
+			// Als het geen schikkeljaar is
+			} else {
+				if(dag <=28){ return true; }
+			}
 		}
-		if (maand == MAAND_JAN || maand == MAAND_MRT || maand == MAAND_MEI|| maand == MAAND_JUL|| maand == MAAND_AUG|| maand== MAAND_OKT|| maand == MAAND_DEC){
-			if (dag < 32){return true;}
-			else return false;
-		}
+
+		// Check voor de maanden die 30 dagen hebben
 		if ( maand == MAAND_APR|| maand == MAAND_JUN|| maand == MAAND_SEP || maand == MAAND_NOV){
-			if (dag<31){return true;}
-			else return false;
+			if (dag <= 30){return true;}
 		}
+
+		// Check voor de maandenmaanden die 31 dagen hebben
+		if (maand == MAAND_JAN || maand == MAAND_MRT || maand == MAAND_MEI|| maand == MAAND_JUL|| maand == MAAND_AUG|| maand== MAAND_OKT|| maand == MAAND_DEC){
+			if (dag <= 31){return true;}
+		}
+
+		// Als geen van de opties klopt, dan bestaat de maand niet
 		return false;
 	}
 
@@ -101,14 +111,27 @@ public class Datum {
 
 		return datum;
 	}
+
+	/**
+	 * Getter voor de dag als int
+	 * @return dag
+	 */
 	public int getDag() {
 		return dag;
 	}
 
+	/**
+	 * Getter voor de maand als int
+	 * @return maand
+	 */
 	public int getMaand() {
 		return maand;
 	}
 
+	/**
+	 * getter voor het jaar als int
+	 * @return jaar
+	 */
 	public int getJaar() {
 		return jaar;
 	}

@@ -129,11 +129,12 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
-                for(int k = 0; aantalArtikelen > k; k++){
-                    Random random = new Random();
-                    int value = getRandomValue(1, AANTAL_ARTIKELEN);
-                    dienblad.voegToe(new Artikel(artikelen[value], artikelprijzen[value]));
-                }
+//                for(int k = 0; aantalArtikelen > k; k++){
+//                    Random random = new Random();
+//                    int value = getRandomValue(1, AANTAL_ARTIKELEN);
+//                    dienblad.voegToe(new Artikel(artikelen[value], artikelprijzen[value]));
+//                }
+                kantine.loopPakSluitAan(dienblad, artikelen);
 
             }
 

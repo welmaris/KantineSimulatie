@@ -9,7 +9,7 @@ public class Dienblad {
     private Persoon klant;
 
     /**
-     * Constructor
+     * Constructor voor dienblad met artikelen
      */
     public Dienblad(Stack<Artikel> artikelen) {
 
@@ -35,41 +35,25 @@ public class Dienblad {
     }
 
     /**
-     * Methode om aantal artikelen op dienblad te tellen
-     *
-     * @return Het aantal artikelen
+     * Getter voor ArtikelIterator als Iterator met type Artikel
+     * @return artikelIterator
      */
-    public int getAantalArtikelen() {
-        // method body omitted
-        //return artikelen.size();
-        int artikelenAantal = 0;
-        while(artikelIterator.hasNext()) {
-            artikelenAantal++;
-            artikelIterator.next();
-        }
-        return artikelenAantal;
+    public Iterator<Artikel> getArtikelIterator() {
+        return artikelIterator;
     }
 
     /**
-     * Methode om de totaalprijs van de artikelen op dienblad uit te rekenen
-     *
-     * @return De totaalprijs
+     * Getter voor de klant als type Persoon
+     * @return klant
      */
-    public double getTotaalPrijs() {
-        // method body omitted
-        double totaal = 0;
-        Iterator<Artikel> it = artikelen.iterator();
-        while(it.hasNext()) {
-            Artikel artikel = it.next();
-            totaal += artikel.getPrijs();
-        }
-        return totaal;
-    }
-
     public Persoon getKlant() {
         return klant;
     }
 
+    /**
+     * setter voor de klant als type Persoon
+     * @param klant
+     */
     public void setKlant(Persoon klant) {
         this.klant = klant;
     }
