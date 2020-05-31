@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class KassaRij {
 
-    //
+
     private LinkedList<Dienblad> kassarij;
 
     /**
