@@ -96,6 +96,35 @@ public class KantineSimulatie {
         return artikelen;
     }
 
+    /*public void klantAanmaken() {
+        for(int i = 0; i > 100; i++) {
+            if (i == 99) {
+                new KantineMedewerker();
+            } else if (i < 10) {
+                new Docent();
+            } else {
+                new Student();
+            }
+        }
+    }*/
+
+    @Override
+    public String toString() {
+        return "persoon =" + kantine.klantAanmaken();
+    }
+
+    public double berekenGemiddelde() {
+        return Administratie.berekenGemiddeldAantal(new int[]{45, 56, 34, 39, 40, 31});
+    }
+
+    public double berekenGemiddeld() {
+        return Administratie.berekenGemiddeldeOmzet(new double[]{567.70, 498.25, 458.90} );
+    }
+
+    public double[] berekenDagOmzet() {
+        return Administratie.berekenDagOmzet(new double[]{321.35, 450.50, 210.45, 190.85, 193.25, 159.90, 214.25, 220.90, 201.90, 242.70, 260.35});
+    }
+
     /**
      * Deze methode simuleert een aantal dagen
      * in het verloop van de kantine
@@ -137,6 +166,7 @@ public class KantineSimulatie {
                 kantine.loopPakSluitAan(dienblad, artikelen, kantineaanbod);
 
             }
+
 
             // verwerk rij voor de kassa
             kantine.verwerkRijVoorKassa();
