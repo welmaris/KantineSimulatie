@@ -1,13 +1,14 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Kantine {
 
     private Kassa kassa;
     private KassaRij kassarij;
     private Dienblad dienblad;
-
+    private Random random;
     /**
      * Constructor voor de Kantine. Heeft geen parameters nodig.
      * Maakt een kassa met een kassarij.
@@ -17,6 +18,23 @@ public class Kantine {
         kassa = new Kassa(kassarij);
     }
 
+    //het kiezen van een random nunmmer die we hierna aan een type klant koppelen
+    public Persoon klantAanmaken() {
+       int i = random.nextInt(100);
+
+        if (i==99) {
+            return new KantineMedewerker();
+        }
+
+        else if (i<10) {
+            return new Docent();
+        }
+
+        else{
+            return new Student();
+        }
+
+    }
     /**
      * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee
      * Artikelen aan en plaats deze op het dienblad. Tenslotte sluit de Persoon zich aan bij de rij
@@ -29,6 +47,7 @@ public class Kantine {
         kassarij.sluitAchteraan(dienblad);
     }
 
+    rand
     /**
      * In deze methode wordt een dienblad met artikelen
      * in de kassarij geplaatst

@@ -113,7 +113,7 @@ public class KantineSimulatie {
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
-                Dienblad dienblad = new Dienblad(new Persoon());
+                Dienblad dienblad = new Dienblad(kantine.klantAanmaken());
 
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalArtikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
