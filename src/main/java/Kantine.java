@@ -9,6 +9,9 @@ public class Kantine {
     private KassaRij kassarij;
     private Dienblad dienblad;
     private Random random;
+    // private KantineAanbod kantineaanbod;
+
+
     /**
      * Constructor voor de Kantine. Heeft geen parameters nodig.
      * Maakt een kassa met een kassarij.
@@ -47,20 +50,21 @@ public class Kantine {
         kassarij.sluitAchteraan(dienblad);
     }
 
-    rand
+
     /**
      * In deze methode wordt een dienblad met artikelen
      * in de kassarij geplaatst
      * @param dienblad
      * @param artikelnamen
      */
-    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen){
+    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen, KantineAanbod aanbod){
         // zet dienblad
         this.dienblad = dienblad;
 
         // voeg artikelen toe aan dienblad
         for(int i = 0; i < artikelnamen.length; i++){
-            dienblad.voegToe(new Artikel(artikelnamen[i], 0.00));
+            
+            dienblad.voegToe(aanbod.getArtikel(artikelnamen[i]));
         }
 
         // sluit achteraan in de rij
