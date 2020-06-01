@@ -134,7 +134,7 @@ public class KantineSimulatie {
 //                    int value = getRandomValue(1, AANTAL_ARTIKELEN);
 //                    dienblad.voegToe(new Artikel(artikelen[value], artikelprijzen[value]));
 //                }
-                kantine.loopPakSluitAan(dienblad, artikelen);
+                kantine.loopPakSluitAan(dienblad, artikelen, kantineaanbod);
 
             }
 

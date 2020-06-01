@@ -7,6 +7,7 @@ public class Kantine {
     private Kassa kassa;
     private KassaRij kassarij;
     private Dienblad dienblad;
+    // private KantineAanbod kantineaanbod;
 
     /**
      * Constructor voor de Kantine. Heeft geen parameters nodig.
@@ -35,13 +36,14 @@ public class Kantine {
      * @param dienblad
      * @param artikelnamen
      */
-    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen){
+    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen, KantineAanbod aanbod){
         // zet dienblad
         this.dienblad = dienblad;
 
         // voeg artikelen toe aan dienblad
         for(int i = 0; i < artikelnamen.length; i++){
-            dienblad.voegToe(new Artikel(artikelnamen[i], 0.00));
+            
+            dienblad.voegToe(aanbod.getArtikel(artikelnamen[i]));
         }
 
         // sluit achteraan in de rij
