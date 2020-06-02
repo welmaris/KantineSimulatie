@@ -2,22 +2,22 @@ package main.java;
 
 public class Datum {
 
-	private int dag;
-	private int maand;
-	private int jaar;
+	private final int dag;
+	private final int maand;
+	private final int jaar;
 
-	private static int MAAND_JAN = 1;
-	private static int MAAND_FEB = 2;
-	private static int MAAND_MRT = 3;
-	private static int MAAND_APR = 4;
-	private static int MAAND_MEI = 5;
-	private static int MAAND_JUN = 6;
-	private static int MAAND_JUL = 7;
-	private static int MAAND_AUG = 8;
-	private static int MAAND_SEP = 9;
-	private static int MAAND_OKT = 10;
-	private static int MAAND_NOV = 11;
-	private static int MAAND_DEC = 12;
+	private static final int MAAND_JAN = 1;
+	private static final int MAAND_FEB = 2;
+	private static final int MAAND_MRT = 3;
+	private static final int MAAND_APR = 4;
+	private static final int MAAND_MEI = 5;
+	private static final int MAAND_JUN = 6;
+	private static final int MAAND_JUL = 7;
+	private static final int MAAND_AUG = 8;
+	private static final int MAAND_SEP = 9;
+	private static final int MAAND_OKT = 10;
+	private static final int MAAND_NOV = 11;
+	private static final int MAAND_DEC = 12;
 
 	/**
 	 * Constructor voor datum met 3 int parameters
@@ -28,13 +28,12 @@ public class Datum {
 	 */
 	public Datum(int dag, int maand, int jaar){
 		if(bestaatDatum(dag, maand, jaar)) {
-			;
 			this.dag = dag;
 			this.maand = maand;
 			this.jaar = jaar;
 		} else {this.dag = 0;
 			this.maand = 0;
-			this.jaar = 0;};
+			this.jaar = 0;}
 	}
 
 	/**
@@ -89,7 +88,7 @@ public class Datum {
 
 		// Check voor de maandenmaanden die 31 dagen hebben
 		if (maand == MAAND_JAN || maand == MAAND_MRT || maand == MAAND_MEI|| maand == MAAND_JUL|| maand == MAAND_AUG|| maand== MAAND_OKT|| maand == MAAND_DEC){
-			if (dag <= 31){return true;}
+			return dag <= 31;
 		}
 
 		// Als geen van de opties klopt, dan bestaat de maand niet

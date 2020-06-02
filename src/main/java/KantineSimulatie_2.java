@@ -4,14 +4,18 @@ import java.util.*;
 
 public class KantineSimulatie {
 
+    // voor administratie
+    private int[] aantal;
+    private double[] omzet;
+
     // kantine
-    private Kantine kantine;
+    private final Kantine kantine;
 
     // kantineaanbod
-    private KantineAanbod kantineaanbod;
+    private final KantineAanbod kantineaanbod;
 
     // random generator
-    private Random random;
+    private final Random random;
 
     // aantal artikelen
     private static final int AANTAL_ARTIKELEN = 4;
@@ -21,7 +25,7 @@ public class KantineSimulatie {
             new String[] {"Koffie", "Broodje pindakaas", "Broodje kaas", "Appelsap"};
 
     // prijzen
-    private static double[] artikelprijzen = new double[] {1.50, 2.10, 1.65, 1.65};
+    private static final double[] artikelprijzen = new double[] {1.50, 2.10, 1.65, 1.65};
 
     // minimum en maximum aantal artikelen per soort (verander naar 10 en 20)
     private static final int MIN_ARTIKELEN_PER_SOORT = 10;
@@ -92,37 +96,13 @@ public class KantineSimulatie {
             artikelen[i] = artikelnamen[indexen[i]];
 
         }
-
         return artikelen;
     }
 
-    /*public void klantAanmaken() {
-        for(int i = 0; i > 100; i++) {
-            if (i == 99) {
-                new KantineMedewerker();
-            } else if (i < 10) {
-                new Docent();
-            } else {
-                new Student();
-            }
-        }
-    }*/
 
     @Override
     public String toString() {
         return "persoon =" + kantine.klantAanmaken();
-    }
-
-    public double berekenGemiddelde() {
-        return Administratie.berekenGemiddeldAantal(new int[]{45, 56, 34, 39, 40, 31});
-    }
-
-    public double berekenGemiddeld() {
-        return Administratie.berekenGemiddeldeOmzet(new double[]{567.70, 498.25, 458.90} );
-    }
-
-    public double[] berekenDagOmzet() {
-        return Administratie.berekenDagOmzet(new double[]{321.35, 450.50, 210.45, 190.85, 193.25, 159.90, 214.25, 220.90, 201.90, 242.70, 260.35});
     }
 
     /**
@@ -132,6 +112,9 @@ public class KantineSimulatie {
      * @param dagen
      */
     public void simuleer(int dagen) {
+        aantal = new int[dagen];
+        omzet = new double[dagen];
+
         // for lus voor dagen
         for(int i = 0; i < dagen; i++) {
 
@@ -158,11 +141,6 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
-//                for(int k = 0; aantalArtikelen > k; k++){
-//                    Random random = new Random();
-//                    int value = getRandomValue(1, AANTAL_ARTIKELEN);
-//                    dienblad.voegToe(new Artikel(artikelen[value], artikelprijzen[value]));
-//                }
                 kantine.loopPakSluitAan(dienblad, artikelen, kantineaanbod);
 
             }
@@ -179,5 +157,11 @@ public class KantineSimulatie {
             kantine.getKassa().resetKassa();
 
         }
+        // Gemiddelde aantal gepasseerde artikelen per dag
+        Administratie.berekenGemiddeldAantal(aantal);
+        // Gemiddelde dagomzet
+        Administratie.berekenGemiddeldeOmzet(omzet);
+        // Dagomzet per weekdag.
+        Administratie.berekenDagOmzet(omzet);
     }
 }

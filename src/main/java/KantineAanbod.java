@@ -4,9 +4,9 @@ import java.util.*;
 
 public class KantineAanbod {
     // interne opslag voorraad
-    private HashMap<String, ArrayList<Artikel>> aanbod;
-    private HashMap<String, Integer> startVoorraad;
-    private HashMap<String, Double> prijzen;
+    private final HashMap<String, ArrayList<Artikel>> aanbod;
+    private final HashMap<String, Integer> startVoorraad;
+    private final HashMap<String, Double> prijzen;
     private KantineAanbod kantineaanbod = null;
 
     /**

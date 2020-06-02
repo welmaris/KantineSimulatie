@@ -1,12 +1,10 @@
 package main.java;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Kassa {
     private double geldInKassa;
-    private Dienblad dienblad;
-    private KassaRij kassaRij;
+    private final Dienblad dienblad;
     private double totaalPrijs;
     private int gepasseederArtikelen;
 
@@ -18,7 +16,6 @@ public class Kassa {
         dienblad = kassarij.eerstePersoonInRij();
         totaalPrijs = 0;
         gepasseederArtikelen = 0;
-        this.kassaRij = kassarij;
 
     }
 

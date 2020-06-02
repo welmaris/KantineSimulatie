@@ -1,6 +1,5 @@
 package main.java;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class KassaRij {
@@ -53,6 +52,6 @@ public class KassaRij {
      */
     public boolean erIsEenRij() {
         // checken of arraylist null is en dan teruggeven
-return !kassarij.isEmpty();
+        return !kassarij.isEmpty();
     }
 }

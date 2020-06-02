@@ -2,7 +2,7 @@ package main.java;
 
 public class KantineSimulatie {
 
-    private Kantine kantine;
+    private final Kantine kantine;
 
     public static final int DAGEN = 7;
 

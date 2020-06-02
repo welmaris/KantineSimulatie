@@ -1,15 +1,13 @@
 package main.java;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Kantine {
 
-    private Kassa kassa;
-    private KassaRij kassarij;
+    private final Kassa kassa;
+    private final KassaRij kassarij;
     private Dienblad dienblad;
     private Random random;
-    // private KantineAanbod kantineaanbod;
 
 
     /**
