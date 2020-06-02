@@ -10,10 +10,10 @@ public class Student extends Persoon {
         this.studierichting = studierichting;
     }
 
-    /*public Student() {
+    public Student() {
         this.studentnummer = 0;
         this.studierichting = null;
-    }*/
+    }
 
     public int getStudentnummer() {
         return studentnummer;

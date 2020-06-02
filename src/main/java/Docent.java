@@ -10,10 +10,10 @@ public class Docent extends Persoon{
         this.afdeling = afdeling;
     }
 
-    /*public Docent() {
+    public Docent() {
         this.afkorting = null;
         this.afdeling = null;
-    }*/
+    }
 
     public String getAfkorting() {
         return afkorting;
