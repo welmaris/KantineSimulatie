@@ -17,6 +17,7 @@ public class Kantine {
     public Kantine() {
         kassarij = new KassaRij();
         kassa = new Kassa(kassarij);
+        random = new Random();
     }
 
     //het kiezen van een random nunmmer die we hierna aan een type klant koppelen
