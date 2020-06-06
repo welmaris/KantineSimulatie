@@ -59,7 +59,6 @@ public class Datum {
 		// Hier word gecontroleerd of de maand tussen de 1 en de 12 is --> hoeft niet persé, wordt later ook gedaan
 		// Hier word gecontroleerd of de dag tussen de 1 en de 31 ligt --> hoeft niet persé, wordt later ook gedaan
 		// Hier word gecontroleerd of het jaar tussen de  1900 en de 2100 ligt
-//		if ( maand < 1  ||maand > 12 || dag < 1 || dag > 31 || jaar < 1900 || jaar > 2100) {
 		if ( jaar < 1900 || jaar > 2100) {
 			return false;
 		}
@@ -106,7 +105,6 @@ public class Datum {
 	public String getDatumAsString() {
 		//het aanmaken van een string variabele
 		 String datum = dag + "/" + maand + "/" + jaar;
-
 
 		return datum;
 	}

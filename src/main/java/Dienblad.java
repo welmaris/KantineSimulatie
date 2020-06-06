@@ -2,17 +2,15 @@ package main.java;
 
 import java.util.*;
 
-public class Dienblad {
+public class Dienblad implements Iterator {
     // dit moet later een Queue<Persoon>, maar het is een interface, hier leren we later meer over
     private Stack<Artikel> artikelen;
-    private Iterator<Artikel> artikelIterator;
     private Persoon klant;
 
     /**
      * Constructor voor dienblad met artikelen
      */
     public Dienblad(Stack<Artikel> artikelen) {
-
         this.artikelen = artikelen;
     }
 
@@ -20,7 +18,6 @@ public class Dienblad {
      * Constructor voor klant
      */
     public Dienblad(Persoon klant) {
-
         this.klant = klant;
     }
 
@@ -30,7 +27,6 @@ public class Dienblad {
      * @param artikel
      */
     public void voegToe(Artikel artikel) {
-        // method body omitted
         artikelen.add(artikel);
     }
 
@@ -39,7 +35,7 @@ public class Dienblad {
      * @return artikelIterator
      */
     public Iterator<Artikel> getArtikelIterator() {
-        return artikelIterator;
+        return artikelen.iterator();
     }
 
     /**
@@ -56,6 +52,29 @@ public class Dienblad {
      */
     public void setKlant(Persoon klant) {
         this.klant = klant;
+    }
+
+    /**
+     * Returns {@code true} if the iteration has more elements.
+     * (In other words, returns {@code true} if {@link #next} would
+     * return an element rather than throwing an exception.)
+     *
+     * @return {@code true} if the iteration has more elements
+     */
+    @Override
+    public boolean hasNext() {
+        return artikelen.iterator().hasNext();
+    }
+
+    /**
+     * Returns the next element in the iteration.
+     *
+     * @return the next element in the iteration
+     * @throws NoSuchElementException if the iteration has no more elements
+     */
+    @Override
+    public Artikel next() {
+        return artikelen.iterator().next();
     }
 }
 

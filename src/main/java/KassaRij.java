@@ -12,8 +12,7 @@ public class KassaRij {
      * De kassarij word hier leegegemaakt zodat er niet nog mensen(Dienblad) in de rij staan
      */
     public KassaRij() {
-        // method body omitted
-    kassarij.clear();
+    kassarij = new LinkedList<Dienblad>();
     }
 
     /**
@@ -22,9 +21,8 @@ public class KassaRij {
      * @param klant de klant die een dienblad in de hand heeft
      */
     public void sluitAchteraan(Dienblad klant) {
-        // hier word de destbetreffende persoon achteraan in de arraylist gezet
-
-            kassarij.add(klant);
+        // hier word de desbetreffende persoon achteraan in de arraylist gezet
+        kassarij.add(klant);
     }
 
     /**
@@ -36,7 +34,6 @@ public class KassaRij {
     public Dienblad eerstePersoonInRij() {
         // hier word de index 0 van de arraylist opgevraagd
       if(!kassarij.isEmpty()) {
-
 
           Dienblad eersteKlant = kassarij.get(0);
           kassarij.remove(0);

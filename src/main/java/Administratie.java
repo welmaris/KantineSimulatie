@@ -19,16 +19,14 @@ public class Administratie {
         double totaal = 0;
         double hoeveelheid = aantal.length;
 
-        // Waarde wordt toegevoegd aan het totaalbedrag
-        for(int i = 0; hoeveelheid > i; i++){
-            double bedrag = aantal[i];
-            totaal += bedrag;
+        // voor elke dag wordt het aantal artikelen toegevoegd aan het totaal
+        if(aantal.length > 0) {
+            for(int i = 0; hoeveelheid > i; i++) {
+                totaal += aantal[i];
+            }
         }
 
-        // Gemiddelde wordt berekend
-        double gemiddelde = totaal / hoeveelheid;
-
-        return gemiddelde;
+        return (totaal/aantal.length);
     }
 
     /**
@@ -38,22 +36,15 @@ public class Administratie {
      * @return het gemiddelde
      */
     public static double berekenGemiddeldeOmzet(double[] omzet) {
-
         double totaal = 0;
-        double hoeveelheid = omzet.length;
-        double gemiddelde = 0;
 
-        if(hoeveelheid > 0) {
+        if(omzet.length > 0) {
             // Waarde wordt toegevoegd aan het totaalbedrag
-            for(int i = 0; hoeveelheid > i; i++) {
-                double bedrag = omzet[i];
-                totaal += bedrag;
+            for(int i = 0; omzet.length > i; i++) {
+                totaal += omzet[i];
             }
-
-            // Gemiddelde wordt berekend
-            gemiddelde = totaal / hoeveelheid;
         }
-        return gemiddelde;
+        return (totaal / omzet.length);
     }
 
     /**

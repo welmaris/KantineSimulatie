@@ -8,6 +8,7 @@ public class Kantine {
     private final KassaRij kassarij;
     private Dienblad dienblad;
     private Random random;
+    private KantineAanbod kantineAanbod;
 
 
     /**
@@ -56,14 +57,14 @@ public class Kantine {
      * @param dienblad
      * @param artikelnamen
      */
-    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen, KantineAanbod aanbod){
+    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen){
         // zet dienblad
         this.dienblad = dienblad;
 
         // voeg artikelen toe aan dienblad
         for(int i = 0; i < artikelnamen.length; i++){
             
-            dienblad.voegToe(aanbod.getArtikel(artikelnamen[i]));
+            dienblad.voegToe(kantineAanbod.getArtikel(artikelnamen[i]));
         }
 
         // sluit achteraan in de rij
@@ -85,5 +86,9 @@ public class Kantine {
      */
     public Kassa getKassa() {
         return kassa;
+    }
+
+    public void setKantineAanbod(KantineAanbod kantineAanbod) {
+        this.kantineAanbod = kantineAanbod;
     }
 }

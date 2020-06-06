@@ -66,13 +66,6 @@ public class Persoon {
      */
     public void setGeslacht(char geslacht) {
         this.geslacht = geslacht;
-        /*if (geslacht != 'v' && geslacht != 'm') {
-            System.out.println("Onbekend");
-        } else if (geslacht == 'v') {
-            System.out.println("Vrouw");
-        } else {
-            System.out.println("Man");
-        }*/
         switch (geslacht) {
             case 'v':
                 System.out.println("Vrouw");

@@ -28,11 +28,18 @@ public class KantineAanbod {
             aanbod.put(artikelnaam[i], artikelen);
         }
     }
-//getter van kantineaanbod
+
+    /**
+     * getter van kantineaanbod
+     */
     public KantineAanbod getKantineaanbod() {
         return kantineaanbod;
     }
-//setter van kantineaanbod
+
+    /**
+     * setter kantineaanbod
+     * @param kantineaanbod
+     */
     public void setKantineAanbod(KantineAanbod kantineaanbod) {
         this.kantineaanbod = kantineaanbod;
     }
@@ -49,7 +56,7 @@ public class KantineAanbod {
         aanbod.put(productnaam, huidigeVoorraad);
     }
 
-    /*
+    /**
      * Private methode om de lijst van artikelen te krijgen op basis van de naam van het artikel.
      * Retourneert null als artikel niet bestaat.
      */
@@ -80,15 +87,12 @@ public class KantineAanbod {
      * Publieke methode om een artikel via naam van de stapel te pakken. Retouneert null als artikel
      * niet bestaat of niet op voorraad is.
      *
-     * @param naam (van artikel)
+     * @param productnaam (van artikel)
      * @return artikel (of null)
      */
     public Artikel getArtikel(String productnaam) {
         return getArtikel(getArrayList(productnaam));
     }
 
-    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen){
-        //de body van de methode
-
-    }
+    public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen){ }
 }

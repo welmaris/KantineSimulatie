@@ -27,8 +27,8 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        gepasseederArtikelen += getAantalArtikelen();
-        totaalPrijs = getTotaalPrijs();
+        gepasseederArtikelen += getAantalArtikelen(klant);
+        totaalPrijs = getTotaalPrijs(klant);
         geldInKassa += totaalPrijs;
 
     }
@@ -38,10 +38,10 @@ public class Kassa {
      *
      * @return Het aantal artikelen
      */
-    public int getAantalArtikelen() {
-        // method body omitted
+    public int getAantalArtikelen(Dienblad klant) {
         int artikelenAantal = 0;
-        Iterator<Artikel> artikelIterator = dienblad.getArtikelIterator();
+        Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
+
         while(artikelIterator.hasNext()) {
             artikelenAantal++;
             artikelIterator.next();
@@ -54,10 +54,10 @@ public class Kassa {
      *
      * @return De totaalprijs
      */
-    public double getTotaalPrijs() {
-        // method body omitted
+    public double getTotaalPrijs(Dienblad klant) {
         double totaal = 0;
-        Iterator<Artikel> artikelIterator = dienblad.getArtikelIterator();
+        Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
+
         while(artikelIterator.hasNext()) {
             Artikel artikel = artikelIterator.next();
             totaal += artikel.getPrijs();

@@ -50,7 +50,7 @@ public class KantineSimulatie {
                 getRandomArray(AANTAL_ARTIKELEN, MIN_ARTIKELEN_PER_SOORT, MAX_ARTIKELEN_PER_SOORT);
         kantineaanbod = new KantineAanbod(artikelnamen, artikelprijzen, hoeveelheden);
 
-        kantineaanbod.setKantineAanbod(kantineaanbod);
+        kantine.setKantineAanbod(kantineaanbod);
     }
 
     /**
@@ -141,8 +141,7 @@ public class KantineSimulatie {
 
                 // loop de kantine binnen, pak de gewenste
                 // artikelen, sluit aan
-                kantine.loopPakSluitAan(dienblad, artikelen, kantineaanbod);
-
+                kantine.loopPakSluitAan(dienblad, artikelen);
             }
 
 
@@ -152,16 +151,32 @@ public class KantineSimulatie {
             // druk de dagtotalen af en hoeveel personen binnen zijn gekomen
             System.out.println("€" + kantine.getKassa().hoeveelheidGeldInKassa() + " omzet.");
             System.out.println(aantalpersonen + " bezoekers.");
+            System.out.println(kantine.getKassa().aantalArtikelen() + " artikelen verkocht");
 
             // reset de kassa voor de volgende dag
+            omzet[i] = kantine.getKassa().hoeveelheidGeldInKassa();
+            aantal[i] = kantine.getKassa().aantalArtikelen();
             kantine.getKassa().resetKassa();
 
         }
         // Gemiddelde aantal gepasseerde artikelen per dag
-        Administratie.berekenGemiddeldAantal(aantal);
+        double gemiddeldeAantal = Administratie.berekenGemiddeldAantal(aantal);
         // Gemiddelde dagomzet
-        Administratie.berekenGemiddeldeOmzet(omzet);
+        double gemiddeldeOmzet = Administratie.berekenGemiddeldeOmzet(omzet);
         // Dagomzet per weekdag.
-        Administratie.berekenDagOmzet(omzet);
+        double[] totaleDagomzet = Administratie.berekenDagOmzet(omzet);
+
+        System.out.println("Simulatie Afgelopen");
+        System.out.println("Totale dagomzet maandagen: " + totaleDagomzet[0]);
+        System.out.println("Totale dagomzet Dinsdagen: " + totaleDagomzet[1]);
+        System.out.println("Totale dagomzet Woensdagen: " + totaleDagomzet[2]);
+        System.out.println("Totale dagomzet Donderdagen: " + totaleDagomzet[3]);
+        System.out.println("Totale dagomzet Vrijdagen: " + totaleDagomzet[4]);
+        System.out.println("Totale dagomzet Zaterdagen: " + totaleDagomzet[5]);
+        System.out.println("Totale dagomzet Zondagen: " + totaleDagomzet[6]);
+        System.out.println();
+        System.out.println("gemiddeld aantal verkochte artikelen per dag: " + gemiddeldeAantal);
+        System.out.println("gemiddelde omzet per dag: " + gemiddeldeOmzet);
+
     }
 }
