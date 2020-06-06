@@ -20,4 +20,7 @@ public abstract class Betaalwijze {
      * @return Boolean om te kijken of er voldoende saldo is
      */
     public abstract boolean betaal(double tebetalen);
+    if (double tebetalen > saldo) {
+        return false
+    }
 }
