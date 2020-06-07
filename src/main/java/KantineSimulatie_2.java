@@ -100,9 +100,26 @@ public class KantineSimulatie {
     }
 
 
-    @Override
-    public String toString() {
-        return "persoon =" + kantine.klantAanmaken();
+    /**
+     * klant word hier gemaakt. bepaald welk type persoon het wordt.
+     * @return klant
+     */
+    public Persoon klantAanmaken() {
+        // maak persoon en dienblad aan, koppel ze
+        int g = random.nextInt(100);
+        Persoon klant;
+
+        if (g < 89) {
+            klant  = new Student();
+        } else if (g < 99) {
+            klant  = new Docent();
+        } else if (g < 100){
+            klant  = new KantineMedewerker();
+        } else {
+            klant  = new Persoon();
+        }
+
+        return klant;
     }
 
     /**
@@ -125,22 +142,19 @@ public class KantineSimulatie {
             for (int j = 0; j < aantalpersonen; j++) {
 
                 // maak persoon en dienblad aan, koppel ze
-                Dienblad dienblad = new Dienblad(kantine.klantAanmaken());
+                Dienblad dienblad = new Dienblad(klantAanmaken());
 
                 // en bedenk hoeveel artikelen worden gepakt
                 int aantalArtikelen = getRandomValue(MIN_ARTIKELEN_PER_PERSOON, MAX_ARTIKELEN_PER_PERSOON);
 
-                // genereer de "artikelnummers", dit zijn indexen
-                // van de artikelnamen
+                // genereer de "artikelnummers", dit zijn indexen van de artikelnamen
                 int[] tepakken = getRandomArray(
                     aantalArtikelen, 0, AANTAL_ARTIKELEN-1);
 
-                // vind de artikelnamen op basis van
-                // de indexen hierboven
+                // vind de artikelnamen op basis van de indexen hierboven
                 String[] artikelen = geefArtikelNamen(tepakken);
 
-                // loop de kantine binnen, pak de gewenste
-                // artikelen, sluit aan
+                // loop de kantine binnen, pak de gewenste artikelen, sluit aan
                 kantine.loopPakSluitAan(dienblad, artikelen);
             }
 

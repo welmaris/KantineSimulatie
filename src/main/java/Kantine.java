@@ -20,24 +20,6 @@ public class Kantine {
         kassa = new Kassa(kassarij);
         random = new Random();
     }
-
-    //het kiezen van een random nunmmer die we hierna aan een type klant koppelen
-    public Persoon klantAanmaken() {
-       int i = random.nextInt(100);
-
-        if (i==99) {
-            return new KantineMedewerker();
-        }
-
-        else if (i<10) {
-            return new Docent();
-        }
-
-        else{
-            return new Student();
-        }
-
-    }
     /**
      * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee
      * Artikelen aan en plaats deze op het dienblad. Tenslotte sluit de Persoon zich aan bij de rij
