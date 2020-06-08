@@ -7,6 +7,7 @@ public class Persoon {
     private String achternaam;
     private Datum geboortedatum;
     private char geslacht;
+    private Betaalwijze betaalwijze;
 
     /**
      * constructor met parameters en geslacht controle
@@ -45,17 +46,14 @@ public class Persoon {
     }
 
     public void setVoornaam(String voornaam) {
-
         this.voornaam = voornaam;
     }
 
     public void setAchternaam(String achternaam) {
-
         this.achternaam = achternaam;
     }
 
     public void setGeboortedatum(Datum geboortedatum) {
-
         this.geboortedatum = geboortedatum;
     }
 
@@ -96,6 +94,14 @@ public class Persoon {
 
     public char getGeslacht() {
         return geslacht;
+    }
+
+    public Betaalwijze getBetaalwijze() {
+        return betaalwijze;
+    }
+
+    public void setBetaalwijze(Betaalwijze betaalwijze) {
+        this.betaalwijze = betaalwijze;
     }
 
     @Override

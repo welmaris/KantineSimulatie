@@ -27,10 +27,14 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        gepasseederArtikelen += getAantalArtikelen(klant);
         totaalPrijs = getTotaalPrijs(klant);
-        geldInKassa += totaalPrijs;
 
+        if(klant.getKlant().getBetaalwijze().betaal(totaalPrijs)) {
+            gepasseederArtikelen += getAantalArtikelen(klant);
+            geldInKassa += totaalPrijs;
+        } else {
+            System.out.println("Onvoldoende saldo");
+        }
     }
 
     /**
@@ -92,6 +96,5 @@ public class Kassa {
     public void resetKassa() {
         geldInKassa = 0;
         gepasseederArtikelen = 0;
-
     }
 }
