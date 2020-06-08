@@ -29,10 +29,10 @@ public class Kassa {
     public void rekenAf(Dienblad klant) {
         totaalPrijs = getTotaalPrijs(klant);
         if(klant instanceof KortingskaartHouder) {
-            if (((KortingskaartHouder) klant).heeftMaximum() == true) {
+            if (((KortingskaartHouder) klant).heeftMaximum() == true && (totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage()) > ((KortingskaartHouder) klant).geefMaximum()){
                     totaalPrijs -= ((KortingskaartHouder) klant).geefMaximum();
             } else {
-            totaalPrijs = totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage();} }
+            totaalPrijs -= totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage();} }
         if(klant.getKlant().getBetaalwijze().betaal(totaalPrijs)) {
             gepasseederArtikelen += getAantalArtikelen(klant);
             geldInKassa += totaalPrijs;
