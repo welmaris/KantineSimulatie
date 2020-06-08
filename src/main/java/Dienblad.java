@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Dienblad implements Iterator {
     // dit moet later een Queue<Persoon>, maar het is een interface, hier leren we later meer over
-    private Stack<Artikel> artikelen;
+    private Stack<Artikel> artikelen = new Stack<>();
     private Persoon klant;
 
     /**

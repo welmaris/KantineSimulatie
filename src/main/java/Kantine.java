@@ -1,13 +1,10 @@
 package main.java;
 
-import java.util.Random;
-
 public class Kantine {
 
     private final Kassa kassa;
     private final KassaRij kassarij;
     private Dienblad dienblad;
-    private Random random;
     private KantineAanbod kantineAanbod;
 
 
@@ -18,7 +15,6 @@ public class Kantine {
     public Kantine() {
         kassarij = new KassaRij();
         kassa = new Kassa(kassarij);
-        random = new Random();
     }
     /**
      * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee
@@ -58,7 +54,7 @@ public class Kantine {
      */
     public void verwerkRijVoorKassa() {
         while (kassarij.erIsEenRij()) {
-            kassarij.eerstePersoonInRij();
+            kassa.rekenAf(kassarij.eerstePersoonInRij());
         }
     }
 

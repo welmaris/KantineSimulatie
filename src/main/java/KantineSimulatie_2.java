@@ -160,7 +160,11 @@ public class KantineSimulatie {
 
 
             // verwerk rij voor de kassa
-            kantine.verwerkRijVoorKassa();
+            try {
+                kantine.verwerkRijVoorKassa();
+            } catch(TeWeinigGeldException e){
+                System.out.println(e.getMessage());
+            }
 
             // druk de dagtotalen af en hoeveel personen binnen zijn gekomen
             System.out.println("€" + kantine.getKassa().hoeveelheidGeldInKassa() + " omzet.");
@@ -188,7 +192,7 @@ public class KantineSimulatie {
         System.out.println("Totale dagomzet Vrijdagen: " + totaleDagomzet[4]);
         System.out.println("Totale dagomzet Zaterdagen: " + totaleDagomzet[5]);
         System.out.println("Totale dagomzet Zondagen: " + totaleDagomzet[6]);
-        System.out.println();
+        System.out.println("--------------------------------------------------------------");
         System.out.println("gemiddeld aantal verkochte artikelen per dag: " + gemiddeldeAantal);
         System.out.println("gemiddelde omzet per dag: " + gemiddeldeOmzet);
 

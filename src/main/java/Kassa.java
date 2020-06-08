@@ -33,11 +33,22 @@ public class Kassa {
                     totaalPrijs -= ((KortingskaartHouder) klant).geefMaximum();
             } else {
             totaalPrijs -= totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage();} }
-        if(klant.getKlant().getBetaalwijze().betaal(totaalPrijs)) {
+
+        // Exception check voor TeWeinigGeldException
+        try {
+            klant.getKlant().getBetaalwijze().betaal(totaalPrijs);
             gepasseederArtikelen += getAantalArtikelen(klant);
             geldInKassa += totaalPrijs;
-        } else {
-            System.out.println("Onvoldoende saldo");
+        } catch(TeWeinigGeldException e) {
+            String naam;
+            // als de achternaam niet volledig is ingevuld
+            if(klant.getKlant().getAchternaam() == null){
+                naam = "<onbekend>";
+            } else {
+                naam = klant.getKlant().getAchternaam();
+            }
+            String message = naam + " heeft " +e.getMessage();
+            throw new TeWeinigGeldException(message);
         }
     }
 
