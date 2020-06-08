@@ -1,6 +1,6 @@
 package main.java;
 
-public class Docent extends Persoon{
+public class Docent extends Persoon implements KortingskaartHouder{
     private String afkorting;
     private String afdeling;
 
@@ -29,5 +29,20 @@ public class Docent extends Persoon{
 
     public void setAfdeling(String afdeling) {
         this.afdeling = afdeling;
+    }
+
+    @Override
+    public double geefKortingsPercentage() {
+        return 25;
+    }
+
+    @Override
+    public boolean heeftMaximum() {
+        return false;
+    }
+
+    @Override
+    public double geefMaximum() {
+        return 0;
     }
 }

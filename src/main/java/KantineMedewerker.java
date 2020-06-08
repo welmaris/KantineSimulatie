@@ -1,8 +1,9 @@
 package main.java;
 
-public class KantineMedewerker extends Persoon{
+public class KantineMedewerker extends Persoon implements KortingskaartHouder{
     private int medewerkersnummer;
     private boolean magAchterKassa;
+    //private Artikel artikel;
 
     public KantineMedewerker(String BSN, String voornaam, String achternaam, Datum geboortedatum, char geslacht, int medewerkersnummer, boolean magAchterKassa) {
         super(BSN, voornaam, achternaam, geboortedatum, geslacht);
@@ -29,5 +30,20 @@ public class KantineMedewerker extends Persoon{
 
     public void setMagAchterKassa(boolean magAchterKassa) {
         this.magAchterKassa = magAchterKassa;
+    }
+
+    @Override
+    public double geefKortingsPercentage() {
+        return 35;
+    }
+
+    @Override
+    public boolean heeftMaximum() {
+        return false;
+    }
+
+    @Override
+    public double geefMaximum() {
+        return 0;
     }
 }
