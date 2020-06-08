@@ -33,7 +33,7 @@ public class Docent extends Persoon implements KortingskaartHouder{
 
     @Override
     public double geefKortingsPercentage() {
-        return 25;
+        return 0.25;
     }
 
     @Override

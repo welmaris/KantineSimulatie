@@ -28,7 +28,11 @@ public class Kassa {
      */
     public void rekenAf(Dienblad klant) {
         totaalPrijs = getTotaalPrijs(klant);
-
+        if(klant instanceof KortingskaartHouder) {
+            if (((KortingskaartHouder) klant).heeftMaximum() == true) {
+                    totaalPrijs -= ((KortingskaartHouder) klant).geefMaximum();
+            } else {
+            totaalPrijs = totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage();} }
         if(klant.getKlant().getBetaalwijze().betaal(totaalPrijs)) {
             gepasseederArtikelen += getAantalArtikelen(klant);
             geldInKassa += totaalPrijs;
@@ -58,14 +62,16 @@ public class Kassa {
      *
      * @return De totaalprijs
      */
-    public double getTotaalPrijs(Dienblad klant) {
-        double totaal = 0;
-        Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
+    public double getTotaalPrijs(Dienblad klant){
+            double totaal = 0;
+            //KortingskaartHouder k;
+            Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
 
-        while(artikelIterator.hasNext()) {
-            Artikel artikel = artikelIterator.next();
-            totaal += artikel.getPrijs();
-        }
+            while (artikelIterator.hasNext()) {
+                Artikel artikel = artikelIterator.next();
+                totaal += artikel.getPrijs();
+                //totaal = totaal + artikel.getPrijs() * kortingskaartHouder.geefKortingsPercentage();
+            }
         return totaal;
     }
 

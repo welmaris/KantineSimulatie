@@ -34,7 +34,7 @@ public class KantineMedewerker extends Persoon implements KortingskaartHouder{
 
     @Override
     public double geefKortingsPercentage() {
-        return 35;
+        return 0.35;
     }
 
     @Override
