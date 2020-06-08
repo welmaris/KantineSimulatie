@@ -28,7 +28,6 @@ public class Persoon {
         } else {
             this.geslacht = 'o';
         }
-        betaalwijze
     }
 
     /**
