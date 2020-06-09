@@ -29,7 +29,7 @@ public class Kassa {
     public void rekenAf(Dienblad klant) {
         totaalPrijs = getTotaalPrijs(klant);
         if(klant instanceof KortingskaartHouder) {
-            if (((KortingskaartHouder) klant).heeftMaximum() == true && (totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage()) > ((KortingskaartHouder) klant).geefMaximum()){
+            if (((KortingskaartHouder) klant).heeftMaximum() && (totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage()) > ((KortingskaartHouder) klant).geefMaximum()){
                     totaalPrijs -= ((KortingskaartHouder) klant).geefMaximum();
             } else {
             totaalPrijs -= totaalPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage();} }
