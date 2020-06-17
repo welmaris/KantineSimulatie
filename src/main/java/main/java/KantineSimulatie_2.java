@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 
 public class KantineSimulatie {
 
-    private static final EntityManager ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("KantineSimulatie");
+    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("KantineSimulatie");
     private EntityManager manager;
 
     // voor administratie
