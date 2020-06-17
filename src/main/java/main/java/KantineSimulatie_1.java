@@ -2,7 +2,6 @@ package main.java;
 
 import javax.persistence.Persistence;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 public class KantineSimulatie {
 
