@@ -7,6 +7,7 @@ package main.java;
 public class Artikel {
     private String naam;
     private double prijs;
+    private int korting = 0;
 
     /**
      * Constructor voor de Klasse Artikel met een naam en prijs
@@ -16,7 +17,13 @@ public class Artikel {
     public Artikel(String naam, double prijs){
         this.naam = naam;
         this.prijs = prijs;
+        korting = 0;
+    }
 
+    public Artikel(String naam, double prijs, int korting){
+        this.naam = naam;
+        this.prijs = prijs;
+        this.korting = korting;
     }
 
     /**
@@ -67,4 +74,7 @@ public class Artikel {
     public String toString() {
         return naam + " €" + prijs;
     }
+
+    public int getKorting(){ return korting; }
+    public void setKorting(int korting){this.korting = korting;}
 }
