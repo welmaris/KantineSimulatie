@@ -1,6 +1,13 @@
 package main.java;
 
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 public class KantineSimulatie {
+
+    private static final EntityManager ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("KantineSimulatie");
+    private EntityManager manager;
 
     private final Kantine kantine;
 
@@ -20,6 +27,8 @@ public class KantineSimulatie {
      * @param dagen
      */
     public void simuleer(int dagen) {
+
+        manager = ENTITY_MANAGER_FACTORY.createEntityManager();
 
         // herhaal voor elke dag
         for (int i = 0; i < dagen; i++) {
@@ -43,6 +52,9 @@ public class KantineSimulatie {
             // reset de kassa voor de volgende dag
             kantine.getKassa().resetKassa();
         }
+
+        manager.close();
+        ENTITY_MANAGER_FACTORY.close();
     }
 
     /**

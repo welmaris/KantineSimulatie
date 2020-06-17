@@ -1,8 +1,14 @@
 package main.java;
 
 import java.util.*;
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 public class KantineSimulatie {
+
+    private static final EntityManager ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("KantineSimulatie");
+    private EntityManager manager;
 
     // voor administratie
     private int[] aantal;
@@ -129,6 +135,9 @@ public class KantineSimulatie {
      * @param dagen
      */
     public void simuleer(int dagen) {
+
+        manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+
         aantal = new int[dagen];
         omzet = new double[dagen];
 
@@ -183,6 +192,9 @@ public class KantineSimulatie {
         double gemiddeldeOmzet = Administratie.berekenGemiddeldeOmzet(omzet);
         // Dagomzet per weekdag.
         double[] totaleDagomzet = Administratie.berekenDagOmzet(omzet);
+
+        manager.close();
+        ENTITY_MANAGER_FACTORY.close();
 
         System.out.println("Simulatie Afgelopen");
         System.out.println("Totale dagomzet maandagen: " + totaleDagomzet[0]);
