@@ -43,7 +43,7 @@
 
             <!-- The database password -->
             <!-- VERVANG DEZE WAARDEN MET DE GELDENDE WAARDEN OP JE EIGEN SYSTEEM -->
-            <property name="javax.persistence.jdbc.password" value="SecretPassw0rd" />
+            <property name="javax.persistence.jdbc.password" value="SecretPassw0rd2020!" />
 
             <property name="hibernate.connection.charSet" value="UTF-8" />
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
