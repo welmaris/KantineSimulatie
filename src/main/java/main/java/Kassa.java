@@ -27,40 +27,55 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        totaalPrijs = getTotaalPrijs(klant);
+        Persoon persoon = klant.getKlant();
 
-        //zodat er later gechekd kan worden of er al producten worden gekocht met korting
-        boolean hasKorting = false;
+//        totaalPrijs = getTotaalPrijs(klant);
 
-        double totaalProductenMetKorting = 0;
+        double kortingsProductenPrijs = 0;
+        double standaardProductenPrijs = 0;
 
-        //Korting op producten
-        for(int i = 0; i < getAantalArtikelen(klant); i++){
-            Artikel artikel = klant.getArtikelIterator().next();
+        Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
 
-            // Als het product korting heeft
-            if(artikel.getKorting() > 0){
-                double korting = artikel.getPrijs() * artikel.getKorting() / 100;
-
-                totaalProductenMetKorting += artikel.getPrijs() - korting;
-
-
-
-                hasKorting = true;
+        while (artikelIterator.hasNext()) {
+            Artikel artikel = artikelIterator.next();
+            if(artikel.getKorting() > 0) {
+                kortingsProductenPrijs += artikel.getPrijs() * (artikel.getKorting() / 100.00);
+            } else {
+                standaardProductenPrijs += artikel.getPrijs();
             }
-
         }
 
-        if(klant instanceof KortingskaartHouder && !hasKorting) {
+        if(persoon instanceof KortingskaartHouder && standaardProductenPrijs > 0){
 
-            // prijs waar Kortingskaart geldig voor is
-            double prijsMetKortingskaart = totaalPrijs - totaalProductenMetKorting;
+            double KortingskaartKorting = (standaardProductenPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage());
             // als er een max is aan de korting, de max wordt bereikt
-            if (((KortingskaartHouder) klant).heeftMaximum() && (prijsMetKortingskaart * ((KortingskaartHouder) klant).geefKortingsPercentage()) > ((KortingskaartHouder) klant).geefMaximum()){
-                totaalPrijs -= ((KortingskaartHouder) klant).geefMaximum();
+            if (((KortingskaartHouder) klant).heeftMaximum() && KortingskaartKorting > ((KortingskaartHouder) klant).geefMaximum()){
+                standaardProductenPrijs -= ((KortingskaartHouder) klant).geefMaximum();
             } else {
-                totaalPrijs -= prijsMetKortingskaart * ((KortingskaartHouder) klant).geefKortingsPercentage();
+
+                standaardProductenPrijs -= KortingskaartKorting;
             }
+        }
+
+        totaalPrijs = standaardProductenPrijs + kortingsProductenPrijs;
+
+        // Exception check voor TeWeinigGeldException
+        try {
+            klant.getKlant().getBetaalwijze().betaal(totaalPrijs);
+
+            gepasseederArtikelen += getAantalArtikelen(klant);
+            geldInKassa += totaalPrijs;
+
+        } catch(TeWeinigGeldException e) {
+            String naam;
+            // als de achternaam niet volledig is ingevuld
+            if(klant.getKlant().getAchternaam() == null){
+                naam = "<onbekend>";
+            } else {
+                naam = klant.getKlant().getAchternaam();
+            }
+            String message = naam + " heeft " +e.getMessage();
+            throw new TeWeinigGeldException(message);
         }
 
         // Exception check voor TeWeinigGeldException
