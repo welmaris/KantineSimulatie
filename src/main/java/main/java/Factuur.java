@@ -12,7 +12,7 @@ public class Factuur implements Serializable{
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
 
     @Column (name = "datum", nullable = false)
     private LocalDate datum;
@@ -23,15 +23,16 @@ public class Factuur implements Serializable{
     @Column (name = "totaal", nullable = false)
     private double totaal;
 
-    @OneToMany(targetEntity = FactuurRegel.class, mappedBy = "factuur")
+    @OneToMany
+    @Column (name = "factuurRegel", nullable = false)
     private ArrayList<FactuurRegel> regels =  new ArrayList<>();
 
-    public Factuur() {
+    public Factuur(){
         totaal = 0;
         korting = 0;
     }
 
-    public Factuur(Dienblad klant, LocalDate datum) {
+    public Factuur(Dienblad klant, LocalDate datum){
         this();
         this.datum = datum;
 
@@ -39,28 +40,33 @@ public class Factuur implements Serializable{
     }
 
     /**
-     * Verwerk artikelen en pas korting toe.
+     * Verwerk artikelen en pas kortingen toe.
      *
-     * Zet het totaal te betalen bedrag en het
-     * totaal aan ontvangen kortingen.
+     * Zet het totaal te betalen bedrag en
+     * het totaal aan ontvangen kortingen
      *
      * @param klant
      */
-    private void verwerkBestelling(Dienblad klant) {
-        // method body omitted
+    private void verwerkBestelling(Dienblad klant){
         Persoon persoon = klant.getKlant();
 
-//        totaalPrijs = getTotaalPrijs(klant);
-
         double kortingsProductenPrijs = 0;
+        double productenKorting = 0;
         double standaardProductenPrijs = 0;
+        double kaartKorting = 0;
 
         Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
 
         while (artikelIterator.hasNext()) {
             Artikel artikel = artikelIterator.next();
+
+            // Moet nog geregeld worden met product en factuur
+            regels.add(new FactuurRegel());
+
             if(artikel.getKorting() > 0) {
-                kortingsProductenPrijs += artikel.getPrijs() * (artikel.getKorting() / 100.00);
+                productenKorting = artikel.getPrijs() * (artikel.getKorting() / 100.00);
+                kortingsProductenPrijs += artikel.getPrijs() - productenKorting;
+                korting += productenKorting;
             } else {
                 standaardProductenPrijs += artikel.getPrijs();
             }
@@ -68,45 +74,43 @@ public class Factuur implements Serializable{
 
         if(persoon instanceof KortingskaartHouder && standaardProductenPrijs > 0){
 
-            double KortingskaartKorting = (standaardProductenPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage());
+            kaartKorting = (standaardProductenPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage());
             // als er een max is aan de korting, de max wordt bereikt
-            if (((KortingskaartHouder) klant).heeftMaximum() && KortingskaartKorting > ((KortingskaartHouder) klant).geefMaximum()){
+            if (((KortingskaartHouder) klant).heeftMaximum() && kaartKorting > ((KortingskaartHouder) klant).geefMaximum()){
+                kaartKorting = ((KortingskaartHouder) klant).geefMaximum();
                 standaardProductenPrijs -= ((KortingskaartHouder) klant).geefMaximum();
             } else {
-
-                standaardProductenPrijs -= KortingskaartKorting;
+                standaardProductenPrijs -= kaartKorting;
             }
+            korting += kaartKorting;
         }
-        totaal = standaardProductenPrijs + kortingsProductenPrijs;
+
+        totaal =  standaardProductenPrijs + kortingsProductenPrijs;
+
     }
 
     /**
-    * @return het totaalbedrag
-    */
+     * @return de Korting
+     */
+    public double getKorting() {
+        return korting;
+    }
+
+    /**
+     * @return het totaalbedrag
+     */
     public double getTotaal() {
         return totaal;
     }
 
-    /**
-     * @return de toegepaste korting
-     */
-     public double getKorting() {
-        return korting;
-     }
-
-    /**
-     * @return een printbaar bonnetje
-     */
     @Override
     public String toString() {
         String bon = "Factuur: ";
         for(int i = 0; regels.size() > i; i++){
-
-            FactuurRegel regel = regels.get(i);
-            bon +=  regel.toString() + "\n";
+            bon +=  regels.get(i).toString() + "\n";
         }
 
-        bon += "\n" + "totaal = " + getTotaal();
+        bon += "\n" + "totaal = " + getTotaal() + "\n" + getKorting();
 
         return bon;
     }
