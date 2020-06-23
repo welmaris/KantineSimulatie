@@ -1,6 +1,7 @@
 package main.java;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.Iterator;
 
 public class Kassa {
@@ -28,37 +29,8 @@ public class Kassa {
      * @param klant die moet afrekenen
      */
     public void rekenAf(Dienblad klant) {
-        Persoon persoon = klant.getKlant();
-
-//        totaalPrijs = getTotaalPrijs(klant);
-
-        double kortingsProductenPrijs = 0;
-        double standaardProductenPrijs = 0;
-
-        Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
-
-        while (artikelIterator.hasNext()) {
-            Artikel artikel = artikelIterator.next();
-            if(artikel.getKorting() > 0) {
-                kortingsProductenPrijs += artikel.getPrijs() * (artikel.getKorting() / 100.00);
-            } else {
-                standaardProductenPrijs += artikel.getPrijs();
-            }
-        }
-
-        if(persoon instanceof KortingskaartHouder && standaardProductenPrijs > 0){
-
-            double KortingskaartKorting = (standaardProductenPrijs * ((KortingskaartHouder) klant).geefKortingsPercentage());
-            // als er een max is aan de korting, de max wordt bereikt
-            if (((KortingskaartHouder) klant).heeftMaximum() && KortingskaartKorting > ((KortingskaartHouder) klant).geefMaximum()){
-                standaardProductenPrijs -= ((KortingskaartHouder) klant).geefMaximum();
-            } else {
-
-                standaardProductenPrijs -= KortingskaartKorting;
-            }
-        }
-
-        totaalPrijs = standaardProductenPrijs + kortingsProductenPrijs;
+        Factuur factuur = new Factuur(klant, LocalDate.now());
+        factuur.getTotaal();
 
         // Exception check voor TeWeinigGeldException
         try {
