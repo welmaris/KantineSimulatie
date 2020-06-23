@@ -1,5 +1,7 @@
 package main.java;
 
+import javax.persistence.EntityManager;
+
 public class Kantine {
 
     private final Kassa kassa;

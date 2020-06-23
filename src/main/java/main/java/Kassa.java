@@ -1,5 +1,6 @@
 package main.java;
 
+import javax.persistence.EntityManager;
 import java.util.Iterator;
 
 public class Kassa {
