@@ -87,8 +87,6 @@ public class Factuur implements Serializable{
         // method body omitted
         return null;
     }
-
-
 }
 
 
