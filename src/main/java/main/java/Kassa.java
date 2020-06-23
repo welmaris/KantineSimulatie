@@ -30,7 +30,7 @@ public class Kassa {
      */
     public void rekenAf(Dienblad klant) {
         Factuur factuur = new Factuur(klant, LocalDate.now());
-        factuur.getTotaal();
+        totaalPrijs = factuur.getTotaal();
 
         // Exception check voor TeWeinigGeldException
         try {
