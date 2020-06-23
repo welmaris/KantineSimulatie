@@ -1,16 +1,30 @@
 package main.java;
 
-import java.time.LocalDate;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
-import javax.persistence.EntityManager;
 
+@Entity
+@Table (name = "factuur")
 public class Factuur implements Serializable{
 
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @Column (name = "datum", nullable = false)
     private LocalDate datum;
+
+    @Column (name = "korting")
     private double korting;
+
+    @Column (name = "totaal", nullable = false)
     private double totaal;
+
+    @OneToMany(targetEntity = FactuurRegel.class, mappedBy = "factuur")
+    private ArrayList<FactuurRegel> regels =  new ArrayList<>();
 
     public Factuur() {
         totaal = 0;
@@ -83,9 +97,18 @@ public class Factuur implements Serializable{
     /**
      * @return een printbaar bonnetje
      */
+    @Override
     public String toString() {
-        // method body omitted
-        return null;
+        String bon = "Factuur: ";
+        for(int i = 0; regels.size() > i; i++){
+
+            FactuurRegel regel = regels.get(i);
+            bon +=  regel.toString() + "\n";
+        }
+
+        bon += "\n" + "totaal = " + getTotaal();
+
+        return bon;
     }
 
 
