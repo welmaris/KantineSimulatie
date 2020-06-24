@@ -1,9 +1,17 @@
 package main.java;
 
 import java.util.*;
-import javax.persistence.Persistence;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.*;
+
+@Embeddable
+@NamedQuery(name = "Artikel.totalen",
+        query = "SELECT artikel_naam, sum(artikel_prijs), artikel_korting")
+@NamedQuery(name = "Artikel.totaalPerDag",
+        query = "SELECT artikel_naam, sum(artikel.prijs), artikel_korting, GROUP BY datum")
+@NamedQuery(name = "PopulaireArtikelen.top3",
+        query = "SELECT artikel_naam, FROM Artikel GROUP BY artikel_naam ORDER BY artikel_naam LIMIT 3")
+@NamedQuery(name = "OmzetArtikelen.top3",
+        query = "SELECT artikel_naam, FROM Artikel ORDER BY sum(artikel_prijs) DESC LIMIT 3")
 
 public class KantineSimulatie {
 
@@ -221,7 +229,7 @@ public class KantineSimulatie {
                 kantineaanbod.getArtikel(artikelnamen[g]).setKorting(0);
             }
 
-//            // druk de dagtotalen af en hoeveel personen binnen zijn gekomen
+            //            // druk de dagtotalen af en hoeveel personen binnen zijn gekomen
 //            System.out.println("€" + kantine.getKassa().hoeveelheidGeldInKassa() + " omzet.");
 //            System.out.println(aantalpersonen + " bezoekers.");
 //            System.out.println(kantine.getKassa().aantalArtikelen() + " artikelen verkocht");
