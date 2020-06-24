@@ -8,15 +8,17 @@ public class Kantine {
     private final KassaRij kassarij;
     private Dienblad dienblad;
     private KantineAanbod kantineAanbod;
+    private EntityManager manager;
 
 
     /**
      * Constructor voor de Kantine. Heeft geen parameters nodig.
      * Maakt een kassa met een kassarij.
      */
-    public Kantine() {
+    public Kantine(EntityManager manager) {
         kassarij = new KassaRij();
-        kassa = new Kassa(kassarij);
+        this.manager = manager;
+        kassa = new Kassa(kassarij, manager);
     }
     /**
      * In deze methode wordt een Persoon en Dienblad gemaakt en aan elkaar gekoppeld. Maak twee

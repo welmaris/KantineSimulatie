@@ -1,6 +1,7 @@
 package main.java;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.Iterator;
 
@@ -8,16 +9,18 @@ public class Kassa {
     private double geldInKassa;
     private final Dienblad dienblad;
     private double totaalPrijs;
-    private int gepasseederArtikelen;
+    private int gepasseerdeArtikelen;
+    private EntityManager manager;
 
     /**
      * Constructor
      */
-    public Kassa(KassaRij kassarij) {
+    public Kassa(KassaRij kassarij, EntityManager manager) {
         geldInKassa = 0;
         dienblad = kassarij.eerstePersoonInRij();
         totaalPrijs = 0;
-        gepasseederArtikelen = 0;
+        gepasseerdeArtikelen = 0;
+        this.manager = manager;
 
     }
 
@@ -30,13 +33,20 @@ public class Kassa {
      */
     public void rekenAf(Dienblad klant) {
         Factuur factuur = new Factuur(klant, LocalDate.now());
+        EntityTransaction transaction = null;
+
         totaalPrijs = factuur.getTotaal();
 
         // Exception check voor TeWeinigGeldException
         try {
             klant.getKlant().getBetaalwijze().betaal(totaalPrijs);
 
-            gepasseederArtikelen += getAantalArtikelen(klant);
+            transaction = manager.getTransaction();
+            transaction.begin();
+            manager.persist(factuur);
+            manager.getTransaction().commit();
+
+            gepasseerdeArtikelen += getAantalArtikelen(klant);
             geldInKassa += totaalPrijs;
 
         } catch(TeWeinigGeldException e) {
@@ -48,13 +58,18 @@ public class Kassa {
                 naam = klant.getKlant().getAchternaam();
             }
             String message = naam + " heeft " +e.getMessage();
+
+            if(transaction != null) {
+                manager.getTransaction().rollback();
+            }
+
             throw new TeWeinigGeldException(message);
         }
 
         // Exception check voor TeWeinigGeldException
         try {
             klant.getKlant().getBetaalwijze().betaal(totaalPrijs);
-            gepasseederArtikelen += getAantalArtikelen(klant);
+            gepasseerdeArtikelen += getAantalArtikelen(klant);
             geldInKassa += totaalPrijs;
         } catch(TeWeinigGeldException e) {
             String naam;
@@ -110,7 +125,7 @@ public class Kassa {
      * @return aantal artikelen
      */
     public int aantalArtikelen() {
-        return gepasseederArtikelen;
+        return gepasseerdeArtikelen;
     }
 
     /**
@@ -129,6 +144,6 @@ public class Kassa {
      */
     public void resetKassa() {
         geldInKassa = 0;
-        gepasseederArtikelen = 0;
+        gepasseerdeArtikelen = 0;
     }
 }
