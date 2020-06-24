@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 @Entity
 @Table (name = "factuur")
-public class Factuur implements Serializable{
+public class Factuur implements Serializable {
 
     @Id
     @GeneratedValue
@@ -23,7 +23,7 @@ public class Factuur implements Serializable{
     @Column (name = "totaal", nullable = false)
     private double totaal;
 
-    @OneToMany(targetEntity = FactuurRegel.class, mappedBy = "factuur", cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = FactuurRegel.class, cascade = CascadeType.ALL)
     private ArrayList<FactuurRegel> regels =  new ArrayList<>();
 
     public Factuur(){
@@ -55,12 +55,19 @@ public class Factuur implements Serializable{
         double kaartKorting = 0;
 
         Iterator<Artikel> artikelIterator = klant.getArtikelIterator();
+        Artikel artikel;
 
         while (artikelIterator.hasNext()) {
-            Artikel artikel = artikelIterator.next();
 
-            // Moet nog geregeld worden met product en factuur
-            regels.add(new FactuurRegel());
+            artikel = artikelIterator.next();
+
+            // Nieuwe factuurRegel wordt gemaakt
+            FactuurRegel factuurRegel = new FactuurRegel();
+            // Artikel wordt toegevoegd
+            factuurRegel.setArtikel(artikel);
+
+            // factuurRegel wordt opgeslagen in Regels
+            regels.add(factuurRegel);
 
             if(artikel.getKorting() > 0) {
                 productenKorting = artikel.getPrijs() * (artikel.getKorting() / 100.00);
@@ -88,16 +95,10 @@ public class Factuur implements Serializable{
 
     }
 
-    /**
-     * @return de Korting
-     */
     public double getKorting() {
         return korting;
     }
 
-    /**
-     * @return het totaalbedrag
-     */
     public double getTotaal() {
         return totaal;
     }
@@ -114,5 +115,3 @@ public class Factuur implements Serializable{
         return bon;
     }
 }
-
-
