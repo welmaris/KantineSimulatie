@@ -1,17 +1,9 @@
 package main.java;
 
+import org.hibernate.Session;
+
 import java.util.*;
 import javax.persistence.*;
-
-@Embeddable
-@NamedQuery(name = "Artikel.totalen",
-        query = "SELECT artikel_naam, sum(artikel_prijs), artikel_korting")
-@NamedQuery(name = "Artikel.totaalPerDag",
-        query = "SELECT artikel_naam, sum(artikel.prijs), artikel_korting, GROUP BY datum")
-@NamedQuery(name = "PopulaireArtikelen.top3",
-        query = "SELECT artikel_naam, FROM Artikel GROUP BY artikel_naam ORDER BY artikel_naam LIMIT 3")
-@NamedQuery(name = "OmzetArtikelen.top3",
-        query = "SELECT artikel_naam, FROM Artikel ORDER BY sum(artikel_prijs) DESC LIMIT 3")
 
 public class KantineSimulatie {
 
@@ -229,38 +221,52 @@ public class KantineSimulatie {
                 kantineaanbod.getArtikel(artikelnamen[g]).setKorting(0);
             }
 
-            //            // druk de dagtotalen af en hoeveel personen binnen zijn gekomen
-//            System.out.println("€" + kantine.getKassa().hoeveelheidGeldInKassa() + " omzet.");
-//            System.out.println(aantalpersonen + " bezoekers.");
-//            System.out.println(kantine.getKassa().aantalArtikelen() + " artikelen verkocht");
-//
-//            // reset de kassa voor de volgende dag
-//            omzet[i] = kantine.getKassa().hoeveelheidGeldInKassa();
-//            aantal[i] = kantine.getKassa().aantalArtikelen();
-//            kantine.getKassa().resetKassa();
+//3
+            Session session = manager.unwrap(Session.class);
+            //totale omzet & toegepaste korting
+//3a
+            Query queryTotaleOmzet = session.createNamedQuery("SELECT SUM(totaal) FROM factuur");
+            double totaleOmzet = (double) queryTotaleOmzet.getSingleResult();
 
-        }
-//        // Gemiddelde aantal gepasseerde artikelen per dag
-//        double gemiddeldeAantal = Administratie.berekenGemiddeldAantal(aantal);
-//        // Gemiddelde dagomzet
-//        double gemiddeldeOmzet = Administratie.berekenGemiddeldeOmzet(omzet);
-//        // Dagomzet per weekdag.
-//        double[] totaleDagomzet = Administratie.berekenDagOmzet(omzet);
+            Query queryTotaleKorting = session.createNamedQuery("SELECT SUM(korting) FROM factuur");
+            double totaleKorting = (double) queryTotaleKorting.getSingleResult();
+//3b
+            Query queryAantalFacturen = session.createNamedQuery("SELECT COUNT(*) FROM factuur");
+            double aantalFacturen = (double) queryAantalFacturen.getSingleResult();
+
+            Query queryTopDrieOmzet = session.createNamedQuery("SELECT id from factuur ORDER BY omzet");
+            queryTopDrieOmzet.setMaxResults(3);
+            List<Double> topDrieOmzet = queryTopDrieOmzet.getResultList();
+
+            double gemiddeldFactuurOmzet = totaleOmzet/aantalFacturen;
+            double gemiddeldFactuurKorting = totaleKorting/aantalFacturen;
+
+            System.out.println("3a totale omzet: " + totaleOmzet);
+            System.out.println("3a totale korting: " + totaleKorting);
+            System.out.println("3b gemiddelde omzet: " + gemiddeldFactuurOmzet);
+            System.out.println("3b gemiddelde korting: " + gemiddeldFactuurKorting);
+//3c
+            StringBuilder lijst = null;
+            String topDrie = null;
+            if(!topDrieOmzet.isEmpty()) {
+                for(double omzet : topDrieOmzet) {
+                    lijst.append(omzet);
+                    topDrie += lijst + " - ";
+                }
+            }
+            System.out.println("3c topOmzet: " + topDrie);
+
+            Query queryArtikelNamen = session.createNamedQuery("SELECT artikel_naam, sum(artikel_prijs), artikel_korting");
+//            List<String> artikelNamen = queryArtikelNamen.getResultList();
+
+            Query queryTotaalPerDag = session.createNamedQuery("SELECT artikel_naam, sum(artikel.prijs), artikel_korting, GROUP BY datum");
+
+            Query queryPopulairArtikelenTopDrie = session.createNamedQuery("SELECT artikel_naam, FROM Artikel GROUP BY artikel_naam ORDER BY artikel_naam LIMIT 3");
+
+            Query queryOmzetArtikelenTopDrie = session.createNamedQuery("SELECT artikel_naam, FROM Artikel ORDER BY sum(artikel_prijs) DESC LIMIT 3");
 
         manager.close();
         ENTITY_MANAGER_FACTORY.close();
-
-//        System.out.println("Simulatie Afgelopen");
-//        System.out.println("Totale dagomzet maandagen: " + totaleDagomzet[0]);
-//        System.out.println("Totale dagomzet Dinsdagen: " + totaleDagomzet[1]);
-//        System.out.println("Totale dagomzet Woensdagen: " + totaleDagomzet[2]);
-//        System.out.println("Totale dagomzet Donderdagen: " + totaleDagomzet[3]);
-//        System.out.println("Totale dagomzet Vrijdagen: " + totaleDagomzet[4]);
-//        System.out.println("Totale dagomzet Zaterdagen: " + totaleDagomzet[5]);
-//        System.out.println("Totale dagomzet Zondagen: " + totaleDagomzet[6]);
-//        System.out.println("--------------------------------------------------------------");
-//        System.out.println("gemiddeld aantal verkochte artikelen per dag: " + gemiddeldeAantal);
-//        System.out.println("gemiddelde omzet per dag: " + gemiddeldeOmzet);
 
     }
 }

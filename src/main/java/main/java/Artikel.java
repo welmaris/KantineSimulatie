@@ -1,18 +1,15 @@
 package main.java;
-import javax.persistence.*;
+
+import javax.persistence.Embeddable;
 
 /**
  * klasse voor het creëeren van een artikel met een naam en een prijs.
  * voor het opgeven van een prijs, gebruik BigDecimal.valueOf(0) en geef de waarde op tussen de haakjes.
  */
+@Embeddable
 public class Artikel {
-    @Column(name = "artikel_naam")
     private String naam;
-
-    @Column(name = "artikel_prijs")
     private double prijs;
-
-    @Column(name = "artikel_korting")
     private int korting = 0;
 
     /**

@@ -14,9 +14,7 @@ public class FactuurRegel implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "factuur_id")
 	private Factuur factuur;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "artikel_id")
+	@Embedded
 	private Artikel artikel;
 
 	public FactuurRegel() {}
