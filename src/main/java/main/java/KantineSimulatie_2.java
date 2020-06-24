@@ -29,10 +29,10 @@ public class KantineSimulatie {
 
     // artikelen
     private static final String[] artikelnamen =
-            new String[] {"Koffie", "Broodje pindakaas", "Broodje kaas", "Appelsap"};
+            new String[]{"Koffie", "Broodje pindakaas", "Broodje kaas", "Appelsap"};
 
     // prijzen
-    private static final double[] artikelprijzen = new double[] {1.50, 2.10, 1.65, 1.65};
+    private static final double[] artikelprijzen = new double[]{1.50, 2.10, 1.65, 1.65};
 
     // minimum en maximum aantal artikelen per soort (verander naar 10 en 20)
     private static final int MIN_ARTIKELEN_PER_SOORT = 10;
@@ -48,7 +48,6 @@ public class KantineSimulatie {
 
     /**
      * Constructor
-     *
      */
     public KantineSimulatie() {
         manager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -110,6 +109,7 @@ public class KantineSimulatie {
 
     /**
      * klant word hier gemaakt. bepaald welk type persoon het wordt.
+     *
      * @return klant
      */
     public Persoon klantAanmaken() {
@@ -118,22 +118,22 @@ public class KantineSimulatie {
         Persoon klant;
 
         if (g < 89) {
-            klant  = new Student();
+            klant = new Student();
         } else if (g < 99) {
-            klant  = new Docent();
-        } else if (g < 100){
-            klant  = new KantineMedewerker();
+            klant = new Docent();
+        } else if (g < 100) {
+            klant = new KantineMedewerker();
         } else {
-            klant  = new Persoon();
+            klant = new Persoon();
         }
 
         return klant;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int dagen;
 
-            if (args.length == 0) {
+        if (args.length == 0) {
             dagen = DAGEN;
         } else {
             dagen = Integer.parseInt(args[0]);
@@ -141,7 +141,7 @@ public class KantineSimulatie {
 
         //simulate(dagen);
         KantineSimulatie simulatie = new KantineSimulatie();
-            simulatie.simuleer(dagen);
+        simulatie.simuleer(dagen);
     }
 
     /**
@@ -158,7 +158,7 @@ public class KantineSimulatie {
         omzet = new double[dagen];
 
         // for lus voor dagen
-        for(int i = 0; i < dagen; i++) {
+        for (int i = 0; i < dagen; i++) {
 
             // bepaal de kortingsproucten voor de dag
             int productenMetKorting = getRandomValue(1, artikelnamen.length);
@@ -166,11 +166,11 @@ public class KantineSimulatie {
             //lijst met producten die nog geen korting hebben
             String[] artikelLijst = artikelnamen;
 
-            for(int g = 0; g < productenMetKorting; g++){
-                int nr = getRandomValue(0, artikelnamen.length-1);
+            for (int g = 0; g < productenMetKorting; g++) {
+                int nr = getRandomValue(0, artikelnamen.length - 1);
 
                 // als artikel al korting heeft, een ander getal gebruiken
-                while(artikelLijst[nr] == null){
+                while (artikelLijst[nr] == null) {
                     nr = getRandomValue(0, artikelnamen.length - 1);
                 }
                 // selecteer het product en verwijder uit lijst
@@ -199,7 +199,7 @@ public class KantineSimulatie {
 
                 // genereer de "artikelnummers", dit zijn indexen van de artikelnamen
                 int[] tepakken = getRandomArray(
-                    aantalArtikelen, 0, AANTAL_ARTIKELEN-1);
+                        aantalArtikelen, 0, AANTAL_ARTIKELEN - 1);
 
                 // vind de artikelnamen op basis van de indexen hierboven
                 String[] artikelen = geefArtikelNamen(tepakken);
@@ -212,15 +212,15 @@ public class KantineSimulatie {
             // verwerk rij voor de kassa
             try {
                 kantine.verwerkRijVoorKassa();
-            } catch(TeWeinigGeldException e){
+            } catch (TeWeinigGeldException e) {
                 System.out.println(e.getMessage());
             }
 
             // einde van de dag worden alle kortingen weer verwijdert
-            for(int g = 0; g < artikelnamen.length; g++){
+            for (int g = 0; g < artikelnamen.length; g++) {
                 kantineaanbod.getArtikel(artikelnamen[g]).setKorting(0);
             }
-
+        }
 //3
             Session session = manager.unwrap(Session.class);
             //totale omzet & toegepaste korting
@@ -238,8 +238,8 @@ public class KantineSimulatie {
             queryTopDrieOmzet.setMaxResults(3);
             List<Double> topDrieOmzet = queryTopDrieOmzet.getResultList();
 
-            double gemiddeldFactuurOmzet = totaleOmzet/aantalFacturen;
-            double gemiddeldFactuurKorting = totaleKorting/aantalFacturen;
+            double gemiddeldFactuurOmzet = totaleOmzet / aantalFacturen;
+            double gemiddeldFactuurKorting = totaleKorting / aantalFacturen;
 
             System.out.println("3a totale omzet: " + totaleOmzet);
             System.out.println("3a totale korting: " + totaleKorting);
@@ -248,25 +248,35 @@ public class KantineSimulatie {
 //3c
             StringBuilder lijst = null;
             String topDrie = null;
-            if(!topDrieOmzet.isEmpty()) {
-                for(double omzet : topDrieOmzet) {
+            if (!topDrieOmzet.isEmpty()) {
+                for (double omzet : topDrieOmzet) {
                     lijst.append(omzet);
                     topDrie += lijst + " - ";
                 }
             }
             System.out.println("3c topOmzet: " + topDrie);
 
+
             Query queryArtikelNamen = session.createNamedQuery("SELECT artikel_naam, sum(artikel_prijs), artikel_korting");
-//            List<String> artikelNamen = queryArtikelNamen.getResultList();
+            List<String> artikelNamen = queryArtikelNamen.getResultList();
 
-            Query queryTotaalPerDag = session.createNamedQuery("SELECT artikel_naam, sum(artikel.prijs), artikel_korting, GROUP BY datum");
+            Query queryTotaalPerDag = session.createNamedQuery("SELECT artikel_naam, sum(artikel.prijs), artikel_korting GROUP BY datum");
+            List<String> totaalPerDag = queryTotaalPerDag.getResultList();
 
-            Query queryPopulairArtikelenTopDrie = session.createNamedQuery("SELECT artikel_naam, FROM Artikel GROUP BY artikel_naam ORDER BY artikel_naam LIMIT 3");
+            Query queryPopulairArtikelenTopDrie = session.createNamedQuery("SELECT artikel_naam FROM Artikel GROUP BY artikel_naam ORDER BY artikel_naam LIMIT 3");
+            List<String> populaireArtikelenTopDrie = queryPopulairArtikelenTopDrie.getResultList();
 
-            Query queryOmzetArtikelenTopDrie = session.createNamedQuery("SELECT artikel_naam, FROM Artikel ORDER BY sum(artikel_prijs) DESC LIMIT 3");
+            Query queryOmzetArtikelenTopDrie = session.createNamedQuery("SELECT artikel_naam FROM Artikel ORDER BY sum(artikel_prijs) DESC LIMIT 3");
+            List<String> omzetArtikelenTopDrie = queryOmzetArtikelenTopDrie.getResultList();
 
-        manager.close();
-        ENTITY_MANAGER_FACTORY.close();
+            System.out.println("5a artikel namen: " + artikelNamen);
+            System.out.println("5b totaal per dag: " + totaalPerDag);
+            System.out.println("5c populaire artikelen: " + populaireArtikelenTopDrie);
+            System.out.println("5b hoogste omzet: " + omzetArtikelenTopDrie);
 
-    }
+            manager.close();
+            ENTITY_MANAGER_FACTORY.close();
+
+        }
 }
+
